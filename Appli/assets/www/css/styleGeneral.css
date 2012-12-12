@@ -7,3 +7,9 @@ div[data-role="header"]{
 div[data-role="footer"]{
 	text-align: center;
 }
+
+/* Page menu */
+
+#boutonsBasDePage{
+	top: 350px;
+}
