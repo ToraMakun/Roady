@@ -11,19 +11,17 @@
 	</head>
 	<body onload="onLoad()">
 		<div data-role="page">
+		
 			<div id="contener">
-				<div data-role="header">Menu</div>
+				<div data-role="header">Ajouter un ami</div>
 				
 				<div data-role="content">
-						<button data-icon="plus">Ajouter un ami</button>
-						<button data-icon="search">Voir mes amis</button>
-						<button data-icon="info">Afficher la carte</button>
-						<button data-icon="star">Voir mes demandes</button>
-						
-						<div class="ui-grid-a" id="boutonsBasDePage" data-position="fixed">
-							<div class="ui-block-a"><button>Quitter</button></div>
-							<div class="ui-block-b"><button>Paramètres</button></div>
-						</div>
+					<form>
+						<label for="login">Nom d'utilisateur:</label>
+						<input type="text" name="nom" id="nom" data-mini="true" />
+						<br>
+						<input type="submit" name="submit" value="Envoyer"/>
+					</form>
 				</div>
 			</div>
 			
