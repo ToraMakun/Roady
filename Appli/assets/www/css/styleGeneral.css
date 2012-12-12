@@ -1,5 +1,9 @@
 @CHARSET "ISO-8859-1";
 
-header{
+div[data-role="header"]{
+	text-align: center;
+}
+
+div[data-role="footer"]{
 	text-align: center;
 }
