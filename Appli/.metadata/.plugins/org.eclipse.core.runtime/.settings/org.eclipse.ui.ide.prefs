@@ -1,0 +1,9 @@
+PROBLEMS_FILTERS_MIGRATE=true
+eclipse.preferences.version=1
+<<<<<<< HEAD
+platformState=1350218658614
+=======
+platformState=1350218658481
+>>>>>>> bdf1300dce904dc77c68170d3e04bab74a3d3b7b
+quickStart=false
+tipsAndTricks=true

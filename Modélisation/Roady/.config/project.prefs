@@ -1,0 +1,11 @@
+#
+#Sat Dec 01 16:01:56 CET 2012
+Modelio.Project.Description=Projet IF26 - A2012\r\n\r\nD\u00E9veloppement Phongap orient\u00E9 service.\r\nPlacer positions de connaissances sur une map et tracer une route pour nous y conduire.
+com.modeliosoft.modelio.diagram.symbol.SymbolViewID.restore=true
+com.modeliosoft.modelio.edition.PropertyViewID.restore=true
+Modelio.Project.Author=Alexandre
+com.modeliosoft.modelio.mda.MdaExplorerContentID.restore=false
+com.modeliosoft.modelio.edition.DescriptionViewID.restore=true
+com.modeliosoft.modelio.edition.AnnotationViewID.restore=true
+com.modeliosoft.modelio.explorer.UmlNavigatorContentID.restore=true
+com.modeliosoft.modelio.audit.AuditViewID.restore=true
