@@ -1,0 +1,17 @@
+@CHARSET "ISO-8859-1";
+
+.groupVisibility{
+	float: right;
+	padding-bottom: 10px;
+}
+
+div[class^="ui-block"]{
+	border-bottom-style:solid;
+	border-width:thin;
+	margin-top: 20px;
+}
+
+#test{
+	height: 36px;
+	vertical-align: text-top;
+}

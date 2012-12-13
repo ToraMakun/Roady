@@ -8,6 +8,8 @@
 		<script src="javascript/chargement.js"></script>
 		<link rel="stylesheet" href="javascript/jquery.mobile-1.2.css" type="text/css" media="screen" />
 		<link rel="stylesheet" href="css/styleGeneral.css" type="text/css" media="screen" />
+		<link rel="stylesheet" href="css/pageAmis.css" type="text/css" media="screen" />
+		<link rel="stylesheet" href="css/pageMenu.css" type="text/css" media="screen" />
 	</head>
 	<body onload="onLoad()">
 		<div data-role="page">
@@ -29,21 +31,18 @@
 								</select> 
 							</div>
 						</h3>
-						<div class="ui-grid-solo">
-							<div class="ui-block-a">
-								Ami1
-								<div class="groupVisibility">
-									Visibilité:
-									<select name="visibleGroupe1" id="visibleA1" data-role="slider" data-mini="true">
-										<option value="non">Non</option>
-										<option value="oui">Oui</option>
-									</select> 
-								</div>
+						<div class="ui-grid-a">
+							<div  class="ui-block-a">Ami1</div>
+							<div id="test" class="ui-block-b" data-inline="false" >
+								<select name="visibleGroupe1" id="visibleA1" data-role="slider" data-mini="true">
+									<option value="non">Non</option>
+									<option value="oui">Oui</option>
+								</select> 
 							</div>
-							<div class="ui-block-a">
-								Ami2
+							
+							<div id="test" class="ui-block-a">
+								<div >Ami2</div>
 								<div class="groupVisibility">
-									Visibilité:
 									<select name="visibleGroupe1" id="visibleA2" data-role="slider" data-mini="true">
 										<option value="non">Non</option>
 										<option value="oui">Oui</option>
@@ -56,7 +55,7 @@
 				</div>
 			</div>
 			
-			<div data-role="footer" data-position="fixed">IF26 - Décembre 2012 <br> Olivier Makutungu - Alexandre Pallueau</div>
+			<div data-role="footer" data-position="fixed"><button id="boutonRetour" data-icon="back">Retour</button>IF26 - Décembre 2012 <br> Olivier Makutungu - Alexandre Pallueau</div>
 		</div>
 	</body>
 </html>

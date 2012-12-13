@@ -9,21 +9,6 @@ div[data-role="footer"]{
 	text-align: center;
 }
 
-/* Page menu */
-
-#boutonsBasDePage{
-	top: 350px;
-}
-
-/* Page amis */
-
-.groupVisibility{
-	float: right;
-}
-
-div[class^="ui-block"]{
-	border-bottom-style:solid;
-	border-width:thin;
-	margin-top: 20px;
-	
+#boutonRetour{
+	float: left;
 }
