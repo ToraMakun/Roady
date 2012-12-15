@@ -1,10 +1,38 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
+<div data-role="header">Amis</div>
+				
+<div data-role="content">
 
-</body>
-</html>
+	<div data-role="collapsible-set" data-content-theme="d">
+		<div data-role="collapsible" data-collapsed="false">
+		<h3>
+			Nouveaux amis
+			<div class="groupVisibility">
+				Visibilité:
+				<select name="visibleGroupe1" id="visibleG1" data-role="slider" data-mini="true">
+					<option value="non">Non</option>
+					<option value="oui">Oui</option>
+				</select> 
+			</div>
+		</h3>
+		<div class="ui-grid-a">
+			<div  class="ui-block-a">Ami1</div>
+			<div id="test" class="ui-block-b" data-inline="false" >
+				<select name="visibleGroupe1" id="visibleA1" data-role="slider" data-mini="true">
+					<option value="non">Non</option>
+					<option value="oui">Oui</option>
+				</select> 
+			</div>
+			
+			<div id="test" class="ui-block-a">
+				<div >Ami2</div>
+				<div class="groupVisibility">
+					<select name="visibleGroupe1" id="visibleA2" data-role="slider" data-mini="true">
+						<option value="non">Non</option>
+						<option value="oui">Oui</option>
+					</select> 
+				</div>
+			</div>
+		</div>
+		</div>
+	</div>
+</div>
