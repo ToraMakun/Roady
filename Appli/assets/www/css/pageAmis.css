@@ -1,17 +1,38 @@
 @CHARSET "ISO-8859-1";
 
-.groupVisibility{
+.amiVisibility{
 	float: right;
 	padding-bottom: 10px;
 }
 
-div[class^="ui-block"]{
-	border-bottom-style:solid;
-	border-width:thin;
-	margin-top: 20px;
+.groupVisibility{
+	float: right;
 }
 
-#test{
-	height: 36px;
-	vertical-align: text-top;
+.ui-block-a, .ui-block-b{
+	border-bottom-style:solid;
+	border-width:thin;
+	margin-top: 10px;
+}
+
+.ui-block-a{
+	padding-bottom: 16px;
+}
+
+.amiName{
+	display: block;
+	float: left;
+	width: 50%;
+	padding-top: 10px; 
+}
+
+.groupName{
+	display: block;
+	float: left;
+	width: 50%;
+	padding-top: 8px; 
+}
+
+.ui-slider-switch{
+	width: 105px !important;
 }
