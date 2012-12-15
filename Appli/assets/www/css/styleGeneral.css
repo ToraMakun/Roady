@@ -13,24 +13,3 @@ div[data-role="footer"]{
 	display: block;
 	float: left;
 }
-
-
-/* page Fiche Ami*/
-#prenom{
-	display: inline;
-}
-
-#nom{
-	display: inline;
-}
-
-/* page Demande ami */
-
-/*and (min-width: 75em)*/
-@media all  {
-	.demandeAmi .ui-block-a { width: 75%; }
-	.demandeAmi .ui-block-b { width: 25%; text-align: right; }
-	.demandeAmi .ui-block-a { clear: left; }
-	}
-}
-

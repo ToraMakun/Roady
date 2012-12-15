@@ -1,0 +1,8 @@
+@CHARSET "ISO-8859-1";
+
+@media all  {
+	.demandeAmi .ui-block-a { width: 75%; }
+	.demandeAmi .ui-block-b { width: 25%; text-align: right; }
+	.demandeAmi .ui-block-a { clear: left; }
+	}
+}
