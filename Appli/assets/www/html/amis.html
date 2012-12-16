@@ -2,13 +2,18 @@
 <script src="javascript/amis.js"></script>
 
 <div data-role="header">Amis</div>
-	
-<div data-role="popup" id="gestionGroupe">
-	<button id="changerNom">Changer nom</button>
-	<button id="suppr">Supprimer</button>
-</div>
-			
+		
 <div data-role="content">
+	<a href="#popupBasic" data-rel="popup">Open Popup</a>
+
+	<div data-role="popup" id="popupBasic">
+		<p>This is a completely basic popup, no options set.<p>
+	</div>
+	
+	<div data-role="popup" id="gestionGroupe">
+		<button id="changerNom">Changer nom</button>
+		<button id="suppr">Supprimer</button>
+	</div>
 
 	<div data-role="collapsible-set" data-content-theme="d">
 		<div data-role="collapsible" data-collapsed="false">
