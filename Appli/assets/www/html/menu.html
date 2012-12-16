@@ -1,16 +1,17 @@
 <link rel="stylesheet" href="css/pageMenu.css" type="text/css" media="screen" />
+<script src="javascript/menu.js"></script>
 
 <div data-role="header">Menu</div>
 				
 <div data-role="content">
-		<button data-icon="plus">Ajouter un ami</button>
-		<button data-icon="search">Voir mes amis</button>
-		<button data-icon="info">Afficher la carte</button>
-		<button data-icon="star">Voir mes demandes</button>
+		<button id="ajoutAmi" data-icon="plus">Ajouter un ami</button>
+		<button id="affAmis" data-icon="search">Voir mes amis</button>
+		<button id="affCarte" data-icon="info">Afficher la carte</button>
+		<button id="affDemandes" data-icon="star">Voir mes demandes</button>
 		
 		<div class="ui-grid-a" id="boutonsBasDePage" data-position="fixed">
-			<div class="ui-block-a"><button>Quitter</button></div>
-			<div class="ui-block-b"><button>Paramètres</button></div>
+			<div class="ui-block-a"><button id="quitter">Quitter</button></div>
+			<div class="ui-block-b"><button id="param">Param&egrave;tres</button></div>
 		</div>
 </div>
 
