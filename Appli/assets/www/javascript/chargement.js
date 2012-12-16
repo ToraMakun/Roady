@@ -56,6 +56,7 @@ function afficherAjoutAmi(){
 		success: function(data){
 			$("#contener *").remove();
 			$("#contener").append(data);
+			instanciationAjoutAmi();
 			$("#page").page("destroy").page();
 		},
 		error: function(){
