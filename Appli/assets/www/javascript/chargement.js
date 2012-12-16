@@ -87,6 +87,7 @@ function afficherMap(){
 		success: function(data){
 			$("#contener *").remove();
 			$("#contener").append(data);
+			instanciationMap();
 			$("#page").page("destroy").page();
 		},
 		error: function(){
