@@ -8,7 +8,7 @@ function instanciationMenu(){
 	$("#quitter").click(function(){navigator.app.exitApp();});
 	$("#param").click(afficherParametres);
 	
-	$("#boutonRetour").text("Se d&eacute;connecter");
+	$("#boutonRetour").text("Se deconnecter");
 	$("#boutonRetour").unbind();
 	$("#boutonRetour").click(function(){afficherConnexion();});
 }

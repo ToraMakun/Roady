@@ -6,3 +6,9 @@
 	.demandeAmi .ui-block-a { clear: left; }
 	}
 }
+
+.ui-block-a, .ui-block-b{
+	border-bottom-style:solid;
+	border-width:thin;
+	margin-top: 10px;
+}

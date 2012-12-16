@@ -60,7 +60,7 @@ function afficherAjoutAmi(){
 			$("#page").page("destroy").page();
 		},
 		error: function(){
-			alert("Erreur: page inscription non chargée");
+			alert("Erreur: page ajouter un ami non chargée");
 		}
 	});
 }
@@ -75,7 +75,7 @@ function afficherAmis(){
 			$("#page").page("destroy").page();
 		},
 		error: function(){
-			alert("Erreur: page inscription non chargée");
+			alert("Erreur: page amis non chargée");
 		}
 	});
 }
@@ -90,7 +90,7 @@ function afficherMap(){
 			$("#page").page("destroy").page();
 		},
 		error: function(){
-			alert("Erreur: page inscription non chargée");
+			alert("Erreur: carte non chargée");
 		}
 	});
 }
@@ -105,7 +105,7 @@ function afficherDemandeAmi(){
 			$("#page").page("destroy").page();
 		},
 		error: function(){
-			alert("Erreur: page inscription non chargée");
+			alert("Erreur: page demandes amis non chargée");
 		}
 	});
 }
@@ -120,7 +120,7 @@ function afficherParametres(){
 			$("#page").page("destroy").page();
 		},
 		error: function(){
-			alert("Erreur: page inscription non chargée");
+			alert("Erreur: page parametres non chargée");
 		}
 	});
 }
@@ -135,7 +135,7 @@ function afficherFicheAmi(){
 			$("#page").page("destroy").page();
 		},
 		error: function(){
-			alert("Erreur: page inscription non chargée");
+			alert("Erreur: fiche amie non chargée");
 		}
 	});
 }
