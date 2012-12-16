@@ -7,9 +7,8 @@ function afficherConnexion(){
 		url: 'html/connexion.html',
 		dataType: 'html',
 		success: function(data){
-			$("#contener *").empty();
+			$("#contener *").remove();
 			$("#contener").append(data);
-			//$("#page").page("destroy").page();
 			instanciationConnexion();
 			$("#page").page("destroy").page();
 		},
@@ -24,12 +23,27 @@ function afficherMenu(){
 		url: 'html/menu.html',
 		dataType: 'html',
 		success: function(data){
-			$("#contener *").empty();
+			$("#contener *").remove();
 			$("#contener").append(data);
 			$("#page").page("destroy").page();
 		},
 		error: function(){
-			alert("Erreur: page menu non chargé");
+			alert("Erreur: page menu non chargée");
+		}
+	});
+}
+
+function afficherInscription(){
+	$.ajax({
+		url: 'html/inscription.html',
+		dataType: 'html',
+		success: function(data){
+			$("#contener *").remove();
+			$("#contener").append(data);
+			$("#page").page("destroy").page();
+		},
+		error: function(){
+			alert("Erreur: page inscription non chargée");
 		}
 	});
 }
