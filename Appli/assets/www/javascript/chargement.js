@@ -103,6 +103,7 @@ function afficherDemandeAmi(){
 		success: function(data){
 			$("#contener *").remove();
 			$("#contener").append(data);
+			instanciationDemandeAmi();
 			$("#page").page("destroy").page();
 		},
 		error: function(){

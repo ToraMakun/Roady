@@ -1,14 +1,19 @@
 @CHARSET "ISO-8859-1";
 
 @media all  {
-	.demandeAmi .ui-block-a { width: 75%; }
-	.demandeAmi .ui-block-b { width: 25%; text-align: right; }
+	.demandeAmi .ui-block-a {
+		width: 75%;
+		border-bottom-style:solid;
+		border-width:thin;
+		margin-top: 10px;
+	}
+	.demandeAmi .ui-block-b {
+		width: 25%;
+		text-align: right;
+		border-bottom-style:solid;
+		border-width:thin;
+		margin-top: 10px;
+	}
 	.demandeAmi .ui-block-a { clear: left; }
 	}
-}
-
-.ui-block-a, .ui-block-b{
-	border-bottom-style:solid;
-	border-width:thin;
-	margin-top: 10px;
 }
