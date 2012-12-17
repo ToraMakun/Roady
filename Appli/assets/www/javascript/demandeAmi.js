@@ -1,6 +1,6 @@
 function instanciationDemandeAmi(){
 	
-	$("#boutonRetour").text("Retour");
+	$("#boutonRetour .ui-btn-text").text("Retour");
 	$("#boutonRetour").unbind();
 	$("#boutonRetour").click(afficherMenu);
 }

@@ -4,7 +4,7 @@ function instanciationAmis(){
 	$(".groupName").on('taphold', function(){$("#gestionGroupe").popup("open", {x:0, y:0});});
 	$(".ui-block-a").on('tap', afficherFicheAmi);
 	
-	$("#boutonRetour").text("Retour");
+	$("#boutonRetour .ui-btn-text").text("Retour");
 	$("#boutonRetour").unbind();
 	$("#boutonRetour").click(afficherMenu);
 }

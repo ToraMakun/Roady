@@ -4,7 +4,7 @@ function instanciationConnexion(){
 	
 	$("#boutonInscription").click(afficherInscription);
 	
-	$("#boutonRetour").text("Quitter");
+	$("#boutonRetour .ui-btn-text").text("Quitter");
 	$("#boutonRetour").unbind();
 	$("#boutonRetour").click(function(){navigator.app.exitApp();});
 }

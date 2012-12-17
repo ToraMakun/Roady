@@ -8,7 +8,7 @@ function instanciationFicheAmi(){
 	$("#boutonOkDialogSuppr").click(function(){alert("A faire");});
 	$("#boutonKoDialogSuppr").click(function(){$("#dialogSuppr").dialog("close");});
 	
-	$("#boutonRetour").text("Retour");
+	$("#boutonRetour .ui-btn-text").text("Retour");
 	$("#boutonRetour").unbind();
 	$("#boutonRetour").click(afficherAmis);
 }
