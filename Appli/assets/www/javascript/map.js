@@ -1,5 +1,3 @@
-var map;
-
 function instanciationMap(){
 
 	$("#boutonRetour .ui-btn-text").text("Retour");
@@ -7,11 +5,13 @@ function instanciationMap(){
 	$("#boutonRetour").click(function(){afficherMenu();});
 }
 
+var map;
+
 function centrerCarte(){
 	navigator.geolocation.getCurrentPosition(
 		function(position) {
 			latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-			map.panTo(latLng);
+			map.panTo(latLng);		//Il faut utiliser panTo pour recharger la carte
 		},
 		function(error) {
 			alert("pas bon");
@@ -22,7 +22,7 @@ function centrerCarte(){
 }
 
 function initialiserCarte(){
-	
+	//Si on a la géolocalisation, on l'affiche, sinon on se met sur l'UTT
 	navigator.geolocation.getCurrentPosition(
 		function(position) {
 			var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);

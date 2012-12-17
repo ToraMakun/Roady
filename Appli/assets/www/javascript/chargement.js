@@ -10,7 +10,7 @@ function afficherConnexion(){
 			$("#contener *").remove();
 			$("#contener").append(data);
 			instanciationConnexion();
-			$("#page").page("destroy").page();
+			$("#page").page("destroy").page();		//Rafraichit la page pour mettre le style de JQM
 		},
 		error: function(){
 			alert("Erreur: formulaire de connexion non chargé");
@@ -137,6 +137,7 @@ function afficherFicheAmi(){
 		success: function(data){
 			$("#contener *").remove();
 			$("#contener").append(data);
+			//Place les pages dialogue au bon endroit dans index
 			$("#dialogChanger").remove().insertAfter("#page");
 			$("#dialogSuppr").remove().insertAfter("#page");
 			instanciationFicheAmi();
