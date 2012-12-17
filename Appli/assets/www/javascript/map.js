@@ -8,15 +8,17 @@ function instanciationMap(){
 }
 
 function centrerCarte(){
-	alert("test");
-	navigator.geolocation.getCurrentPosition(function(position) {alert("bon");
-	latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);},
-	function(error) {alert("pas bon");
-        alert('code: '    + error.code    + '\n' +
-              'message: ' + error.message + '\n');
-		});
-	alert("test2");
-	map.setCenter(latLng);
+	navigator.geolocation.getCurrentPosition(
+		function(position) {
+			latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+			map.panTo(latLng);
+		},
+		function(error) {
+			alert("pas bon");
+			alert('code: '    + error.code    + '\n' +
+				  'message: ' + error.message + '\n');
+		}
+	);	
 }
 
 function initialiserCarte(){
