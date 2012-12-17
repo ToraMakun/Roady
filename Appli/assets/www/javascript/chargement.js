@@ -119,6 +119,7 @@ function afficherParametres(){
 		success: function(data){
 			$("#contener *").remove();
 			$("#contener").append(data);
+			instanciationParametres();
 			$("#page").page("destroy").page();
 		},
 		error: function(){
