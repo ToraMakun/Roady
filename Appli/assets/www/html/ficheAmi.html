@@ -1,3 +1,5 @@
+<script src="javascript/ficheAmi.js"></script>
+
 <link rel="stylesheet" href="css/pageFicheAmi.css" type="text/css" media="screen" />
 
 <div data-role="header">Fiche Amis</div>
@@ -8,6 +10,12 @@
 	<div id="mail">a.p@poule.fr</div><br>
 	<div id="telephone">0606060606</div><br>	
 	<button id="boutonAfficher" data-icon="info">Afficher sa position</button>
-	<button id="boutonChanger" data-icon="forward">Changer de groupe</button>
+	<a href="#dialog" id="boutonChanger" data-role="button" data-rel="dialog" data-icon="forward">Changer de groupe</a>
 	<button id="boutonSuppr" data-icon="delete">Supprimer</button>				
+</div>
+
+<div id="dialog" data-role="page">
+	<div data-role="header">Page</div>
+	<div data-role="content">Page et poule et poule et poule</div>
+	<div data-role="footer">Page</div>
 </div>
