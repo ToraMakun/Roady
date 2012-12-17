@@ -10,12 +10,40 @@
 	<div id="mail">a.p@poule.fr</div><br>
 	<div id="telephone">0606060606</div><br>	
 	<button id="boutonAfficher" data-icon="info">Afficher sa position</button>
-	<a href="#dialog" id="boutonChanger" data-role="button" data-rel="dialog" data-icon="forward">Changer de groupe</a>
-	<button id="boutonSuppr" data-icon="delete">Supprimer</button>				
+	<a href="#dialogChanger" id="boutonChanger" data-role="button" data-rel="dialog" data-icon="forward">Changer de groupe</a>
+	<a href="#dialogSuppr" id="boutonSuppr" data-role="button"  data-rel="dialog" data-icon="delete">Supprimer</a>				
 </div>
 
-<div id="dialog" data-role="page">
-	<div data-role="header">Page</div>
-	<div data-role="content">Page et poule et poule et poule</div>
-	<div data-role="footer">Page</div>
+<div id="dialogChanger" data-role="page">
+	<div data-role="header">Changer</div>
+	<div data-role="content">
+		<p>Dans quel groupe souhaitez vous placer cette personne ?</p>
+		<select id="listeGroupe">
+			<option value="Nouveaux amis">Nouveaux amis</option>
+		</select>
+		<div class="ui-grid-a">
+			<div class="ui-block-a">
+				<a id="boutonOkDialogChanger" data-role="button">Changer</a>
+			</div>	
+			<div class="ui-block-b">
+				<a id="boutonKoDialogChanger" data-role="button">Annuler</a>
+			</div>
+		</div>
+		
+	</div>
+</div>
+
+<div id="dialogSuppr" data-role="page">
+	<div data-role="header">Supprimer</div>
+	<div data-role="content">
+		<p>Etes vous sur de vouloir supprimer cette personne ?</p>
+		<div class="ui-grid-a">
+			<div class="ui-block-a">
+				<a id="boutonOkDialogSuppr" data-role="button">Oui</a>
+			</div>	
+			<div class="ui-block-b">
+				<a id="boutonKoDialogSuppr" data-role="button">Non</a>
+			</div>
+		</div>
+	</div>
 </div>

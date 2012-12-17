@@ -137,7 +137,8 @@ function afficherFicheAmi(){
 		success: function(data){
 			$("#contener *").remove();
 			$("#contener").append(data);
-			$("#dialog").remove().insertAfter("#page");
+			$("#dialogChanger").remove().insertAfter("#page");
+			$("#dialogSuppr").remove().insertAfter("#page");
 			instanciationFicheAmi();
 			$("#page").page("destroy").page();
 		},
