@@ -41,6 +41,7 @@ function afficherInscription(){
 		success: function(data){
 			$("#contener *").remove();
 			$("#contener").append(data);
+			instanciationInscription();
 			$("#page").page("destroy").page();
 		},
 		error: function(){
@@ -72,6 +73,7 @@ function afficherAmis(){
 		success: function(data){
 			$("#contener *").remove();
 			$("#contener").append(data);
+			instanciationAmis();
 			$("#page").page("destroy").page();
 		},
 		error: function(){
