@@ -17,7 +17,8 @@ function centrerCarte(){
 			alert("pas bon");
 			alert('code: '    + error.code    + '\n' +
 				  'message: ' + error.message + '\n');
-		}
+		},
+		{ enableHighAccuracy: true }
 	);	
 }
 
@@ -44,7 +45,8 @@ function initialiserCarte(){
 				    maxZoom   : 20
 			};
 			map = new google.maps.Map(document.getElementById('map'), myOptions);
-		}
+		},
+		{ enableHighAccuracy: true }
 	);
 }
 
