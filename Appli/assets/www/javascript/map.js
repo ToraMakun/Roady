@@ -1,5 +1,7 @@
 function instanciationMap(){
 
+	$("#boutonCentrer").click(centrerCarte);
+	
 	$("#boutonRetour .ui-btn-text").text("Retour");
 	$("#boutonRetour").unbind();
 	$("#boutonRetour").click(function(){afficherMenu();});
@@ -10,7 +12,8 @@ var map;
 function centrerCarte(){
 	navigator.geolocation.getCurrentPosition(
 		function(position) {
-			latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+			alert("Poule");
+			latLng = new google.maps.LatLng(position.coords.longitude, position.coords.latitude);
 			map.panTo(latLng);		//Il faut utiliser panTo pour recharger la carte
 		},
 		function(error) {
@@ -26,7 +29,7 @@ function initialiserCarte(){
 	//Si on a la géolocalisation, on l'affiche, sinon on se met sur l'UTT
 	navigator.geolocation.getCurrentPosition(
 		function(position) {
-			var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+			var latLng = new google.maps.LatLng(position.coords.longitude, position.coords.latitude);
 			var myOptions = {
 				    zoom      : 14,
 				    center    : latLng,
