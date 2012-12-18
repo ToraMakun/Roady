@@ -39,7 +39,7 @@ function insertGroupe(nom, vue){
 	}, errorSql);
 }
 
-function selectAuth(){
+function selectGroupes(){
 
 	db.transaction(function(tx){
 		tx.executeSql('SELECT * FROM auth', [], function(tx, results){
