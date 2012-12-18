@@ -1,3 +1,7 @@
+var listeMarkers=new array();
+var listeBulles=new array();
+var map;
+
 function instanciationMap(){
 
 	$("#boutonCentrer").click(centrerCarte);
@@ -7,12 +11,9 @@ function instanciationMap(){
 	$("#boutonRetour").click(function(){afficherMenu();});
 }
 
-var map;
-
 function centrerCarte(){
 	navigator.geolocation.getCurrentPosition(
 		function(position) {
-			alert("Poule");
 			latLng = new google.maps.LatLng(position.coords.longitude, position.coords.latitude);
 			map.panTo(latLng);		//Il faut utiliser panTo pour recharger la carte
 		},
@@ -31,7 +32,7 @@ function initialiserCarte(){
 		function(position) {
 			var latLng = new google.maps.LatLng(position.coords.longitude, position.coords.latitude);
 			var myOptions = {
-				    zoom      : 14,
+				    zoom      : 8,
 				    center    : latLng,
 				    mapTypeId : google.maps.MapTypeId.TERRAIN, // Type de carte, différentes valeurs possible HYBRID, ROADMAP, SATELLITE, TERRAIN
 				    maxZoom   : 20
@@ -48,15 +49,37 @@ function initialiserCarte(){
 				    maxZoom   : 20
 			};
 			map = new google.maps.Map(document.getElementById('map'), myOptions);
+			afficherAmis();
 		},
 		{ enableHighAccuracy: true }
 	);
 }
 
+function afficherAmis(){
 
-function placerMarker(uneLatLng, unTitre){
+	selectAmis(
+		function(resultat){
+			if(resultat.length!=0){
+				for(var i=0;i<resultat.rows.length;i++)
+				{
+					alert("patapatapa");
+					placerMarker(resultat.rows.item(i).latitude,
+								resultat.rows.item(i).longitude,
+								resultat.rows.item(i).prenom+resultat.rows.item(i).nom); 
+				}
+			}
+			else
+			{
+				alert("PAs de retour venant de la base");
+			}
+		}
+	);
+}
+
+function placerMarker(uneLatitude, uneLongitude, unTitre){
 	var marker = new google.maps.Marker({
-			position : uneLatLng,
+			position : new google.maps.LatLng(uneLongitude, uneLatitude),
 			map      : map,
 			title    : unTitre});
+	listeMarkers. = marker;
 }
