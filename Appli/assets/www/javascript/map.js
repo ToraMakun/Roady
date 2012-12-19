@@ -1,5 +1,5 @@
-var listeMarkers=new array();
-var listeBulles=new array();
+var listeMarkers=new Array();
+var listeBulles=new Array();
 var map;
 
 function instanciationMap(){
@@ -12,6 +12,10 @@ function instanciationMap(){
 }
 
 function centrerCarte(){
+	
+	var leMarker=getMarker("Poule Poule");
+	leMarker.setMap(null);
+	
 	navigator.geolocation.getCurrentPosition(
 		function(position) {
 			latLng = new google.maps.LatLng(position.coords.longitude, position.coords.latitude);
@@ -32,7 +36,7 @@ function initialiserCarte(){
 		function(position) {
 			var latLng = new google.maps.LatLng(position.coords.longitude, position.coords.latitude);
 			var myOptions = {
-				    zoom      : 8,
+				    zoom      : 6,
 				    center    : latLng,
 				    mapTypeId : google.maps.MapTypeId.TERRAIN, // Type de carte, différentes valeurs possible HYBRID, ROADMAP, SATELLITE, TERRAIN
 				    maxZoom   : 20
@@ -78,8 +82,18 @@ function afficherAmis(){
 
 function placerMarker(uneLatitude, uneLongitude, unTitre){
 	var marker = new google.maps.Marker({
-			position : new google.maps.LatLng(uneLongitude, uneLatitude),
+			position : new google.maps.LatLng(uneLatitude, uneLongitude),
 			map      : map,
 			title    : unTitre});
-	listeMarkers. = marker;
+	listeMarkers.push(marker);
+}
+
+function getMarker(unTitre){
+	for(var unIt=0; unIt<listeMarkers.length; unIt++)
+	{
+		if(listeMarkers[unIt].title==unTitre)
+		{
+			return listeMarkers[unIt];
+		}
+	}
 }
