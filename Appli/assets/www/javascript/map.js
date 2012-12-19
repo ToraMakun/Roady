@@ -103,10 +103,11 @@ function placerMarker(uneLatitude, uneLongitude, unTitre){
 		position : new google.maps.LatLng(uneLatitude, uneLongitude)
 	});
 	google.maps.event.addListener(marker, 'click', function() {
-		infoWindow.open(map,marker);
+		$("#bulle [data-role=divider]").empty().text(unTitre);
+		$("#bulle").popup("open", {x:event.clientX, y:event.clientY});
 	});
 	google.maps.event.addListener(infoWindow, 'domready', function(){
-		$("#bulle").trigger("create");
+		//$("#bulle").trigger("create");
 	});
 	listeMarkers.push(marker);
 }
