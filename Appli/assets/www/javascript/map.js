@@ -1,4 +1,5 @@
 var listeMarkers=new Array();
+var userMarker;
 var map;
 
 function instanciationMap(){
@@ -8,8 +9,8 @@ function instanciationMap(){
 	$("#boutonRefresh").click(
 			function(){
 				$("#bulle").popup("close");
-				listeMarkers=new Array();
-				placerMarker(latLng.lat(), latLng.lng(), "Moi");
+				unsetMarkers();
+				centrerCarte();
 				afficherAmis();
 			});
 	
@@ -20,13 +21,11 @@ function instanciationMap(){
 
 function centrerCarte(){
 	
-	/*var leMarker=getMarker("Poule Poule");
-	leMarker.setMap(null);*/
-	
 	navigator.geolocation.getCurrentPosition(
 		function(position) {
 			latLng = new google.maps.LatLng(position.coords.longitude, position.coords.latitude);
-			map.panTo(latLng);		//Il faut utiliser panTo pour recharger la carte
+			userMarker.setPosition(new google.maps.LatLng(latLng.lat(), latLng.lng()));
+			map.panTo(latLng);		//Il faut utiliser panTo pour replacer la carte
 		},
 		function(error) {
 			alert("Positionnement impossible");
@@ -92,13 +91,25 @@ function placerMarker(uneLatitude, uneLongitude, unTitre){
 			position : new google.maps.LatLng(uneLatitude, uneLongitude),
 			map      : map,
 			title    : unTitre});
-			
-	google.maps.event.addListener(marker, 'click', function() {
-		$("#bulle [data-role=divider]").empty().text(unTitre);
-		$("#bulle").popup("open", {x:event.clientX, y:event.clientY});
-	});
-	
-	listeMarkers.push(marker);
+
+	if(unTitre=="Moi")
+	{
+		google.maps.event.addListener(marker, 'click', function() {
+			$("#bulle [data-role=divider]").empty().text(unTitre);
+			$("#boutonTracer").parents("li").css("visibility","hidden");
+			$("#bulle").popup("open", {x:event.clientX, y:event.clientY});
+		});
+		userMarker=marker;
+	}
+	else
+	{
+		google.maps.event.addListener(marker, 'click', function() {
+			$("#bulle [data-role=divider]").empty().text(unTitre);
+			$("#boutonTracer").parents("li").css("visibility","visible");
+			$("#bulle").popup("open", {x:event.clientX, y:event.clientY});
+		});
+		listeMarkers.push(marker);
+	}
 }
 
 //Trace la route
@@ -107,17 +118,16 @@ function tracerRoute(event){
 	//On récupère le nom de l'utilisateur qu'on rejoint via le menu du bouton
 	var truc=$(event.currentTarget).clone(true, true);
 	var leNomDest=$("#"+truc.attr("id")).parents("ul").children("[data-role=divider]").text();
-
+	
 	//On cherche le marker grâce au nom trouvé au dessus
 	var leMarkerDest=getMarker(leNomDest);
-	var leMarkerOrigine=getMarker("Moi");
 	
 	direction = new google.maps.DirectionsRenderer({
 		map   : map
 	});
 
 	var request = {
-		origin      : leMarkerOrigine.position,
+		origin      : userMarker.position,
 		destination : leMarkerDest.position,
 		travelMode  : google.maps.DirectionsTravelMode.DRIVING // Type de transport
 	}
@@ -139,4 +149,13 @@ function getMarker(unTitre){
 			return listeMarkers[unIt];
 		}
 	}
+}
+
+//Enlève les markers de la map pour la rafraichir
+function unsetMarkers(){
+	for(var unIt=0; unIt<listeMarkers.length; unIt++)
+	{
+		listeMarkers[unIt].setMap(null);
+	}
+	listeMarkers=new Array();
 }
