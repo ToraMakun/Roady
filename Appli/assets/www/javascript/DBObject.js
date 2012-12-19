@@ -29,12 +29,12 @@ function createDB(){
 				"login varchar(20) not null constraint Uutilisateur_login unique," +
 				"message varchar(20) not null default '')"
 		);
-		/*deleteAmis();
+		deleteAmis();
 		deleteDemandesAmis();
 		insertAmi("Toule", "Poule", "Poule", 46.391094, -0.421225);
 		insertAmi("Tiule", "Pyule", "Pyule", 46.582665, 0.334594);
 		insertDemandeAmi("Plouah", true);
-		insertDemandeAmi("Pliuah", false);*/
+		insertDemandeAmi("Pliuah", false);
 	}, errorSql);
 }
 /*
@@ -81,7 +81,7 @@ function selectAmis(code){
 function selectDemandesAmis(code){
 
 	db.transaction(function(tx){
-		tx.executeSql('SELECT * FROM demandeAmi', [], function(tx, results){
+		tx.executeSql('SELECT * FROM demandeAmi order by id desc', [], function(tx, results){
 			code(results);
 		}, errorSql);
 	}, errorSql);
@@ -140,6 +140,15 @@ function majGroupe(id, nom, vue){
 	}, errorSql);
 }
 */
+function updateDemandeAmi(id, status){
+
+	db.transaction(function(tx){
+		db.transaction(function(tx){
+			tx.executeSql("update demandeAmi set status=? where id=?", [status, id]);
+		}, errorSql);
+	}, errorSql);
+}
+
 function errorSql(error){
 	alert("Error processing SQL ("+error.code+"): "+error.message);
 }
