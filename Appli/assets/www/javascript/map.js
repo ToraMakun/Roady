@@ -42,7 +42,8 @@ function initialiserCarte(){
 				    maxZoom   : 20
 			};
 			map = new google.maps.Map(document.getElementById('map'), myOptions);
-			placerMarker(latLng, "Moi");
+			placerMarker(latLng.lat(), latLng.lng(), "Moi");
+			afficherAmis();
 		},
 		function(error) {
 			var latLng = new google.maps.LatLng(48.269026,4.066694);
@@ -66,10 +67,9 @@ function afficherAmis(){
 			if(resultat.length!=0){
 				for(var i=0;i<resultat.rows.length;i++)
 				{
-					alert("patapatapa");
 					placerMarker(resultat.rows.item(i).latitude,
 								resultat.rows.item(i).longitude,
-								resultat.rows.item(i).prenom+resultat.rows.item(i).nom); 
+								resultat.rows.item(i).prenom+" "+resultat.rows.item(i).nom); 
 				}
 			}
 			else

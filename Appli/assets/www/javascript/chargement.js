@@ -1,5 +1,5 @@
 function onLoad(){
-	document.addEventListener("deviceready", afficherConnexion, false);
+	document.addEventListener("deviceready", function(){createDB(); afficherConnexion();}, false);
 }
 
 function afficherConnexion(){

@@ -29,9 +29,10 @@ function createDB(){
 				"login varchar(20) not null constraint Uutilisateur_login unique," +
 				"message varchar(20) not null default '')"
 		);
-		//delAmi();
-		//insertAmis("Toule", "Poule", "Poule", 46.391094, -0.421225);
-		//insertAmis("Tiule", "Pyule", "Pyule", 46.582665, 0.334594);
+		delAmi();
+		insertAmis("Toule", "Poule", "Poule", 46.391094, -0.421225);
+		insertAmis("Tiule", "Pyule", "Pyule", 46.582665, 0.334594);
+		alert("Base créée");
 	}, errorSql);
 }
 /*
@@ -43,7 +44,7 @@ function insertGroupe(nom, vue){
 */
 function insertAmis(login, nom, prenom, latitude, longitude){
 	db.transaction(function(tx){
-		tx.executeSql("insert into ami(login, nom, prenom, latitude, longitude) values(?, ?, ?, ?, ?)", [login, nom, prenom, latitude, longitude]);
+		tx.executeSql("insert or ignore into ami(login, nom, prenom, latitude, longitude) values(?, ?, ?, ?, ?)", [login, nom, prenom, latitude, longitude]);
 	}, errorSql);
 }
 /*
