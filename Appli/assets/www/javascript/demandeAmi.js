@@ -18,10 +18,10 @@ function afficherDemandes(){
 				$(".demandeAmi").append('<div class="ui-block-a '+resultat.rows.item(unIt).id+'">'+resultat.rows.item(unIt).login+'</div>')
 				$(".demandeAmi").append('<div class="ui-block-b '+resultat.rows.item(unIt).id+'">'+resultat.rows.item(unIt).status+'</div>')
 				
-				if(!resultat.rows.item(unIt).isEmetteur){
+					if(resultat.rows.item(unIt).isUserEmetteur=="false"){
 					
 					$(".demandeAmi .ui-block-b:last").css("background-color", "orange");
-					$(".demandeAmi .ui-block-b:last").click(/*Ouvre popup pour choisir d'accepter ou non*/ )
+					$(".demandeAmi .ui-block-b:last").click(/*Ouvre popup pour choisir d'accepter ou non */);
 				}
 			}
 		}		
