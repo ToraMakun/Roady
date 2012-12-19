@@ -85,6 +85,29 @@ function placerMarker(uneLatitude, uneLongitude, unTitre){
 			position : new google.maps.LatLng(uneLatitude, uneLongitude),
 			map      : map,
 			title    : unTitre});
+			
+	var contentMarker='<div id="bulle" data-role="popup">' +
+							'<div data-role="header">'+unTitre+'</div>' +
+							'<div data-role="content" class="ui-grid-a">' +
+								'<div class="ui-block-a">' +
+									'<a id="boutonTracerRoute" data-role="button">Tracer route</a>' +
+								'</div>' +
+								'<div class="ui-block-b">' +
+									'<a id="boutonRafraichir" data-role="button">Rafraichir</a>' +
+								'</div>' +
+							'</div>' +
+						'</div>';
+						
+	var infoWindow = new google.maps.InfoWindow({
+		content  : contentMarker,
+		position : new google.maps.LatLng(uneLatitude, uneLongitude)
+	});
+	google.maps.event.addListener(marker, 'click', function() {
+		infoWindow.open(map,marker);
+	});
+	google.maps.event.addListener(infoWindow, 'domready', function(){
+		$("#bulle").trigger("create");
+	});
 	listeMarkers.push(marker);
 }
 

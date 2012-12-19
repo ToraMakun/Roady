@@ -5,3 +5,8 @@
 	border-style: solid;
 	border-width: thin;
 }
+
+#bulle{
+	width: 300px;
+	height: 100px;
+}

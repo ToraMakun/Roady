@@ -32,7 +32,6 @@ function createDB(){
 		delAmi();
 		insertAmis("Toule", "Poule", "Poule", 46.391094, -0.421225);
 		insertAmis("Tiule", "Pyule", "Pyule", 46.582665, 0.334594);
-		alert("Base créée");
 	}, errorSql);
 }
 /*
