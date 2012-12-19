@@ -79,7 +79,7 @@ function afficherAmis(){
 			}
 			else
 			{
-				alert("Pas de retour venant de la base");
+				//alert("Pas de retour venant de la base");
 			}
 		}
 	);

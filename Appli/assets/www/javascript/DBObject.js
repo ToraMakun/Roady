@@ -29,9 +29,11 @@ function createDB(){
 				"login varchar(20) not null constraint Uutilisateur_login unique," +
 				"message varchar(20) not null default '')"
 		);
-		delAmi();
-		insertAmis("Toule", "Poule", "Poule", 46.391094, -0.421225);
-		insertAmis("Tiule", "Pyule", "Pyule", 46.582665, 0.334594);
+		deleteAmis();
+		deleteDemandesAmis();
+		insertAmi("Toule", "Poule", "Poule", 46.391094, -0.421225);
+		insertAmi("Tiule", "Pyule", "Pyule", 46.582665, 0.334594);
+		insertDemandeAmi("Plouah", true);
 	}, errorSql);
 }
 /*
@@ -41,13 +43,13 @@ function insertGroupe(nom, vue){
 	}, errorSql);
 }
 */
-function insertAmis(login, nom, prenom, latitude, longitude){
+function insertAmi(login, nom, prenom, latitude, longitude){
 	db.transaction(function(tx){
 		tx.executeSql("insert or ignore into ami(login, nom, prenom, latitude, longitude) values(?, ?, ?, ?, ?)", [login, nom, prenom, latitude, longitude]);
 	}, errorSql);
 }
 
-function insertdemandeAmi(login, isUserEmetteur){
+function insertDemandeAmi(login, isUserEmetteur){
 	db.transaction(function(tx){
 		tx.executeSql("insert or ignore into demandeAmi(login, isUserEmetteur) values(?, ?)", [login, isUserEmetteur]);
 	}, errorSql);
@@ -75,11 +77,20 @@ function selectAmis(code){
 	}, errorSql);
 }
 
+function selectDemandesAmis(code){
+
+	db.transaction(function(tx){
+		tx.executeSql('SELECT * FROM demandeAmi', [], function(tx, results){
+			code(results);
+		}, errorSql);
+	}, errorSql);
+}
+
 function amiExiste(unLogin){
 
 	db.transaction(function(tx){
 		tx.executeSql('SELECT login FROM ami where login=?', [unLogin], function(tx, results){
-				if(results.row.length==0)
+				if(results.rows.length==0)
 				{
 					return false;
 				}
@@ -95,7 +106,7 @@ function demandeAmiExiste(unLogin){
 
 	db.transaction(function(tx){
 		tx.executeSql('SELECT login FROM demandeAmi where login=?', [unLogin], function(tx, results){
-				if(results.row.length==0)
+				if(results.rows.length==0)
 				{
 					return false;
 				}
@@ -107,9 +118,15 @@ function demandeAmiExiste(unLogin){
 	}, errorSql);
 }
 
-function delAmi(id){
+function deleteAmis(){
 	db.transaction(function(tx){
 		tx.executeSql('delete FROM ami');
+	}, errorSql);
+}
+
+function deleteDemandesAmis(){
+	db.transaction(function(tx){
+		tx.executeSql('delete FROM demandeAmi');
 	}, errorSql);
 }
 /*
