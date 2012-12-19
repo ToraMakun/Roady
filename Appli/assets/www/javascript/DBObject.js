@@ -46,6 +46,12 @@ function insertAmis(login, nom, prenom, latitude, longitude){
 		tx.executeSql("insert or ignore into ami(login, nom, prenom, latitude, longitude) values(?, ?, ?, ?, ?)", [login, nom, prenom, latitude, longitude]);
 	}, errorSql);
 }
+
+function insertdemandeAmi(login, isUserEmetteur){
+	db.transaction(function(tx){
+		tx.executeSql("insert or ignore into demandeAmi(login, isUserEmetteur) values(?, ?)", [login, isUserEmetteur]);
+	}, errorSql);
+}
 /*
 function selectGroupes(){
 
@@ -64,16 +70,39 @@ function selectAmis(code){
 
 	db.transaction(function(tx){
 		tx.executeSql('SELECT * FROM ami', [], function(tx, results){
-			if (results.rows.length != 0)
-			{
-				//$("form > textarea").append(results.rows.item(0).token);
-				//return results;
 				code(results);
-			}
-			else
-			{
-				alert("Erreur, rien n'est sorti a la base");
-			}
+		}, errorSql);
+	}, errorSql);
+}
+
+function amiExiste(unLogin){
+
+	db.transaction(function(tx){
+		tx.executeSql('SELECT login FROM ami where login=?', [unLogin], function(tx, results){
+				if(results.row.length==0)
+				{
+					return false;
+				}
+				else
+				{
+					return true;
+				}
+		}, errorSql);
+	}, errorSql);
+}
+
+function demandeAmiExiste(unLogin){
+
+	db.transaction(function(tx){
+		tx.executeSql('SELECT login FROM demandeAmi where login=?', [unLogin], function(tx, results){
+				if(results.row.length==0)
+				{
+					return false;
+				}
+				else
+				{
+					return true;
+				}
 		}, errorSql);
 	}, errorSql);
 }
