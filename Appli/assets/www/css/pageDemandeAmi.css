@@ -1,6 +1,9 @@
 @CHARSET "ISO-8859-1";
 
 @media all  {
+	#gestionDemande div[data-role="header"]{
+		font-size: 20px;
+	}
 	.demandeAmi .ui-block-a {
 		width: 75%;
 		border-bottom-style:solid;

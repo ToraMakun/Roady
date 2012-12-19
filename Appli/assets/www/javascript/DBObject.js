@@ -29,12 +29,12 @@ function createDB(){
 				"login varchar(20) not null constraint Uutilisateur_login unique," +
 				"message varchar(20) not null default '')"
 		);
-		deleteAmis();
+		/*deleteAmis();
 		deleteDemandesAmis();
 		insertAmi("Toule", "Poule", "Poule", 46.391094, -0.421225);
 		insertAmi("Tiule", "Pyule", "Pyule", 46.582665, 0.334594);
 		insertDemandeAmi("Plouah", true);
-		insertDemandeAmi("Pliuah", false);
+		insertDemandeAmi("Pliuah", false);*/
 	}, errorSql);
 }
 /*
