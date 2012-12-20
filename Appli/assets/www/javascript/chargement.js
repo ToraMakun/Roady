@@ -131,7 +131,7 @@ function afficherParametres(){
 	});
 }
 
-function afficherFicheAmi(){
+function afficherFicheAmi(idAmi){
 	$.ajax({
 		url: 'html/ficheAmi.html',
 		dataType: 'html',
@@ -141,7 +141,7 @@ function afficherFicheAmi(){
 			//Place les pages dialogue au bon endroit dans index
 			$("#dialogChanger").remove().insertAfter("#page");
 			$("#dialogSuppr").remove().insertAfter("#page");
-			instanciationFicheAmi();
+			instanciationFicheAmi(idAmi);
 			$("#page").page("destroy").page();
 		},
 		error: function(){

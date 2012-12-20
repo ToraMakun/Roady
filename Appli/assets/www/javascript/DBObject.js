@@ -76,6 +76,15 @@ function selectAmis(code){
 	}, errorSql);
 }
 
+function selectAmiParId(id, code){
+
+	db.transaction(function(tx){
+		tx.executeSql('SELECT * FROM ami where id=? order by prenom', [id], function(tx, results){
+				code(results);
+		}, errorSql);
+	}, errorSql);
+}
+
 function selectDemandesAmis(code){
 
 	db.transaction(function(tx){

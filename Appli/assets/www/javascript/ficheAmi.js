@@ -1,5 +1,7 @@
-function instanciationFicheAmi(){
+function instanciationFicheAmi(idAmi){
 
+	afficherAmi(idAmi);
+	
 	$("#boutonAfficher").click(function(){
 		
 		//Tester si on a une position dans la base, si pas => disable
@@ -15,4 +17,20 @@ function instanciationFicheAmi(){
 	$("#boutonRetour .ui-btn-text").text("Retour");
 	$("#boutonRetour").unbind();
 	$("#boutonRetour").click(afficherAmis);
+}
+
+function afficherAmi(idAmi){
+	
+	var code=function(resultat)
+	{
+		if(resultat.rows.length==1)
+		{
+			$("#prenom").text(resultat.rows.item(0).prenom);
+			$("#nom").text(resultat.rows.item(0).nom);
+			$("#mail").text(resultat.rows.item(0).mail);
+			$("#telephone").text(resultat.rows.item(0).telephone);
+		}		
+	}
+	
+	selectAmiParId(idAmi, code);
 }
