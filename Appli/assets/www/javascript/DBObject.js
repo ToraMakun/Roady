@@ -29,21 +29,17 @@ function createDB(){
 				"login varchar(20) not null constraint Uutilisateur_login unique," +
 				"message varchar(20) not null default '')"
 		);
-		deleteAmis();
-		deleteDemandesAmis();
+		//deleteAmis();
+		//deleteDemandesAmis();
+		insertGroupe("Groupe 1");
+		insertGroupe("Groupe 2");
 		insertAmi("Toule", "Poule", "Poule", 46.391094, -0.421225);
 		insertAmi("Tiule", "Pyule", "Pyule", 46.582665, 0.334594);
 		insertDemandeAmi("Plouah", true);
 		insertDemandeAmi("Pliuah", false);
 	}, errorSql);
 }
-/*
-function insertGroupe(nom, vue){
-	db.transaction(function(tx){
-		tx.executeSql("insert into groupe values(?, ?)", [login, token]);
-	}, errorSql);
-}
-*/
+
 function insertAmi(login, nom, prenom, latitude, longitude){
 	db.transaction(function(tx){
 		tx.executeSql("insert or ignore into ami(login, nom, prenom, latitude, longitude) values(?, ?, ?, ?, ?)", [login, nom, prenom, latitude, longitude]);
@@ -55,24 +51,26 @@ function insertDemandeAmi(login, isUserEmetteur){
 		tx.executeSql("insert or ignore into demandeAmi(login, isUserEmetteur) values(?, ?)", [login, isUserEmetteur]);
 	}, errorSql);
 }
-/*
-function selectGroupes(){
+
+function insertGroupe(nom){
+	db.transaction(function(tx){
+		tx.executeSql("insert or ignore into groupe(nom) values(?)", [nom]);
+	}, errorSql);
+}
+
+function selectGroupes(code){
 
 	db.transaction(function(tx){
-		tx.executeSql('SELECT * FROM groupe', [], function(tx, results){
-			if (results.rows.length != 0)
-			{
-				//$("form > textarea").append(results.rows.item(0).token);
-				return results.rows.item(0).login;
-			}
+		tx.executeSql('SELECT * FROM groupe order by nom', [], function(tx, results){
+				code(results);
 		}, errorSql);
 	}, errorSql);
 }
-*/
+
 function selectAmis(code){
 
 	db.transaction(function(tx){
-		tx.executeSql('SELECT * FROM ami', [], function(tx, results){
+		tx.executeSql('SELECT * FROM ami order by prenom', [], function(tx, results){
 				code(results);
 		}, errorSql);
 	}, errorSql);
