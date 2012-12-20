@@ -3,12 +3,12 @@ function instanciationAmis(){
 	afficherGroupes();
 	afficherAmis();
 	
-	//Quand les interrupteurs change
+	/*//Quand les interrupteurs change
 	$("[data-role=slider]").on('slidestart', function(event) {alert("Valeur change")});
 	//Appuyer longtemps pour afficher le popup
 	$(".groupName").on('taphold', function(){$("#gestionGroupe").popup("open", {x:0, y:0});});
 	//Appuyer pour voir la fiche
-	$(".ui-block-a").on('tap', afficherFicheAmi);
+	$(".ui-block-a").on('tap', afficherFicheAmi);*/
 	
 	$("#boutonRetour .ui-btn-text").text("Retour");
 	$("#boutonRetour").unbind();
@@ -38,10 +38,13 @@ function afficherGroupes(){
 					$("[data-role=slider]:last").append('<option selected="selected" value="non">Non visible</option><option value="oui">Visible</option>');
 				}
 			}
+			//Quand les interrupteurs change
+			$("[data-role=slider]").on('slidestart', function(event) {alert("Valeur change")});
+			//Appuyer longtemps pour afficher le popup
+			$(".groupName").on('taphold', function(){$("#gestionGroupe").popup("open", {x:0, y:0});});
+			$("#listContent").collapsibleset( "refresh" );	
+			//$("[data-role=slider]").slider( "refresh" );
 		}
-		//$("select[data-role=slider]").slider( "refresh" );
-		$("#listContent").collapsibleset( "refresh" );	
-		//$("[data-role=slider]").slider( "refresh" );
 	}
 	selectGroupes(code);
 }
@@ -65,6 +68,10 @@ function afficherAmis(){
 					$("[data_ami_slider_id="+resultat.rows.item(unIt).id+"]").append('<option selected="selected" value="non">Non visible</option><option value="oui">Visible</option>');
 				}
 			}
+			//Quand les interrupteurs change
+			$("[data-role=slider]").on('slidestart', function(event) {alert("Valeur change")});
+			//Appuyer pour voir la fiche
+			$(".ui-block-a").on('tap', afficherFicheAmi);
 		}		
 	}
 	
