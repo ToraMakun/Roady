@@ -82,13 +82,14 @@ function afficherAmis(){
 	});
 }
 
-function afficherMap(){
+function afficherMap(unLoginDest){
 	$.ajax({
 		url: 'html/map.html',
 		dataType: 'html',
 		success: function(data){
 			$("#contener *").remove();
 			$("#contener").append(data);
+			if(unLoginDest!=null){nomDestination=unLoginDest;}
 			instanciationMap();
 			$("#page").page("destroy").page();
 		},

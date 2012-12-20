@@ -1,11 +1,12 @@
 var listeMarkers=new Array();
-var userMarker;
-var map;
+var userMarker=null;
+var nomDestination=null;
+var map=null;
 
 function instanciationMap(){
 
 	$("#boutonCentrer").click(centrerCarte);
-	$("#boutonTracer").click(function(){tracerRoute(event); $("#bulle").popup("close");});
+	$("#boutonTracer").click(function(event){tracerRoute(event); $("#bulle").popup("close");});
 	$("#boutonRefresh").click(
 			function(){
 				$("#bulle").popup("close");
@@ -23,7 +24,7 @@ function centrerCarte(){
 	
 	navigator.geolocation.getCurrentPosition(
 		function(position) {
-			latLng = new google.maps.LatLng(position.coords.longitude, position.coords.latitude);
+			latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 			userMarker.setPosition(new google.maps.LatLng(latLng.lat(), latLng.lng()));
 			map.panTo(latLng);		//Il faut utiliser panTo pour replacer la carte
 		},
@@ -38,7 +39,7 @@ function initialiserCarte(){
 	//Si on a la géolocalisation, on l'affiche, sinon on se met sur l'UTT
 	navigator.geolocation.getCurrentPosition(
 		function(position) {
-			var latLng = new google.maps.LatLng(position.coords.longitude, position.coords.latitude);
+			var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 			var myOptions = {
 				    zoom      : 6,
 				    center    : latLng,
@@ -81,6 +82,13 @@ function afficherAmis(){
 			{
 				//alert("Pas de retour venant de la base");
 			}
+			if(nomDestination!=null)
+			{
+				google.maps.event.trigger(getMarker(nomDestination), "click", {x:0, y:0});
+				var leEvent = jQuery.Event("click", { currentTarget: $("#boutonTracer") });
+				$("#boutonTracer").trigger(leEvent);
+				nomDestination=null;
+			}
 		}
 	);
 }
@@ -94,7 +102,7 @@ function placerMarker(uneLatitude, uneLongitude, unTitre){
 
 	if(unTitre=="Moi")
 	{
-		google.maps.event.addListener(marker, 'click', function() {
+		google.maps.event.addListener(marker, 'click', function(event) {
 			$("#bulle [data-role=divider]").empty().text(unTitre);
 			$("#boutonTracer").parents("li").css("visibility","hidden");
 			$("#bulle").popup("open", {x:event.clientX, y:event.clientY});
@@ -103,7 +111,7 @@ function placerMarker(uneLatitude, uneLongitude, unTitre){
 	}
 	else
 	{
-		google.maps.event.addListener(marker, 'click', function() {
+		google.maps.event.addListener(marker, 'click', function(event) {
 			$("#bulle [data-role=divider]").empty().text(unTitre);
 			$("#boutonTracer").parents("li").css("visibility","visible");
 			$("#bulle").popup("open", {x:event.clientX, y:event.clientY});

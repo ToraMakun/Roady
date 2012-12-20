@@ -2,7 +2,7 @@ function instanciationMenu(){
 
 	$("#ajoutAmi").click(afficherAjoutAmi);
 	$("#affAmis").click(afficherAmis);
-	$("#affCarte").click(afficherMap);
+	$("#affCarte").click(function(){afficherMap(null);});
 	$("#affDemandes").click(afficherDemandeAmi);
 	
 	$("#quitter").click(function(){navigator.app.exitApp();});
