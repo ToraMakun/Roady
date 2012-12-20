@@ -1,7 +1,7 @@
 var db=null;
 
 function createDB(){
-	db = window.openDatabase("baseRoads", "1.0", "Roads DB", 1000000);
+	db = window.openDatabase("baseRoads", "2.0", "Roads DB", 1000000);
 	db.transaction(function(tx){
 		tx.executeSql("create table if not exists groupe (" +
 				"id integer not null constraint PKgroupe primary key autoincrement," +
@@ -13,6 +13,8 @@ function createDB(){
 				"login varchar(20) not null constraint Uami_login unique," +
 				"nom varchar(20) not null," +
 				"prenom varchar(20) not null," +
+				"mail varchar(40) not null," +
+				"telephone varchar(10) not null," +
 				"latitude double(15, 12) null default null," +
 				"longitude double(15, 12) null default null," +
 				"groupe integer null default null constraint FKami_groupeANDgroupe_id references groupe(id) on delete set null," +
@@ -33,16 +35,17 @@ function createDB(){
 		//deleteDemandesAmis();
 		insertGroupe("Groupe 1");
 		insertGroupe("Groupe 2");
-		insertAmi("Toule", "Poule", "Poule", 46.391094, -0.421225);
-		insertAmi("Tiule", "Pyule", "Pyule", 46.582665, 0.334594);
+		insertAmi("Toule", "Poule", "Poule", "poule@poule.fr", "0405040504", 46.391094, -0.421225);
+		insertAmi("Tiule", "Pyule", "Pyule", "pyule@pyule.fr", "0546548752", 46.582665, 0.334594);
 		insertDemandeAmi("Plouah", true);
 		insertDemandeAmi("Pliuah", false);
 	}, errorSql);
 }
 
-function insertAmi(login, nom, prenom, latitude, longitude){
+//NON CONFORME A LA VERSION FINALE
+function insertAmi(login, nom, prenom, mail, telephone, latitude, longitude){
 	db.transaction(function(tx){
-		tx.executeSql("insert or ignore into ami(login, nom, prenom, latitude, longitude) values(?, ?, ?, ?, ?)", [login, nom, prenom, latitude, longitude]);
+		tx.executeSql("insert or ignore into ami(login, nom, prenom, mail, telephone, latitude, longitude) values(?, ?, ?, ?, ?, ?, ?)", [login, nom, prenom, mail, telephone, latitude, longitude]);
 	}, errorSql);
 }
 

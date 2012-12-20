@@ -64,7 +64,7 @@ function afficherAmis(){
 			//Quand les interrupteurs change
 			$("[data-role=slider]").on('slidestart', function(event) {alert("Valeur change")});
 			//Appuyer pour voir la fiche
-			$(".ui-block-a").on('tap', afficherFicheAmi);
+			$(".ui-block-a").on('tap', function(){afficherFicheAmi($(this).attr("data_ami_id"));});
 		}		
 	}
 	
