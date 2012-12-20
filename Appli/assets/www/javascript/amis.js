@@ -1,7 +1,7 @@
 function instanciationAmis(){
 
 	afficherGroupes();
-	//afficherAmis();
+	afficherAmis();
 	
 	//Quand les interrupteurs change
 	$("[data-role=slider]").on('slidestart', function(event) {alert("Valeur change")});
@@ -27,52 +27,46 @@ function afficherGroupes(){
 				$("[data-role=collapsible]:last").append('<h3>'+
 											'<div class="groupName">'+resultat.rows.item(unIt).nom+'</div>'+
 											'<div class="groupVisibility">'+
-												'<select data_slider_id="'+resultat.rows.item(unIt).id+'" data-role="slider" data-mini="true">'+
-													'<option value="non">Non visible</option>'+
-													'<option selected="selected" value="oui">Visible</option>'+
-												'</select> '+
+												'<select data_group_slider_id="'+resultat.rows.item(unIt).id+'" data-role="slider" data-mini="true">'+
+												'</select>'+
 											'</div></h3>');
+				if(resultat.rows.item(unIt).vue=="true"){
+					$("[data-role=slider]:last").append('<option value="non">Non visible</option><option selected="selected" value="oui">Visible</option>');
+				}
+				else
+				{
+					$("[data-role=slider]:last").append('<option selected="selected" value="non">Non visible</option><option value="oui">Visible</option>');
+				}
 			}
 		}
 		//$("select[data-role=slider]").slider( "refresh" );
 		$("#listContent").collapsibleset( "refresh" );	
-		//$("select[data-role=slider]").slider( "refresh" );
+		//$("[data-role=slider]").slider( "refresh" );
 	}
 	selectGroupes(code);
 }
-/*
+
 function afficherAmis(){
 	
 	var code=function(resultat)
 	{
 		if(resultat.rows.length!=0)
 		{
-			$("#contentPage").append('<div class="ui-grid-a demandeAmi"></div>');;
 			for(var unIt=0; unIt<resultat.rows.length; unIt++){
-				$(".demandeAmi").append('<div class="ui-block-a" data_id="'+resultat.rows.item(unIt).id+'">'+resultat.rows.item(unIt).login+'</div>')
-				$(".demandeAmi").append('<div class="ui-block-b" data_id="'+resultat.rows.item(unIt).id+'">'+resultat.rows.item(unIt).status+'</div>')
+
+				$("[data_group_id="+resultat.rows.item(unIt).groupe+"] .ui-grid-a").append('<div class="ui-block-a" data_ami_id="'+resultat.rows.item(unIt).id+'"><div class="amiName">'+resultat.rows.item(unIt).prenom+' '+resultat.rows.item(unIt).nom+'</div></div>')
+				$("[data_group_id="+resultat.rows.item(unIt).groupe+"] .ui-grid-a").append('<div class="ui-block-b" data_ami_id="'+resultat.rows.item(unIt).id+'"><div class="amiVisibility"><select data_ami_slider_id="'+resultat.rows.item(unIt).id+'" data-role="slider" data-mini="true"></select></div></div>')
 				
-				if(resultat.rows.item(unIt).isUserEmetteur=="false" && resultat.rows.item(unIt).status=="En cours"){
-					
-					$(".demandeAmi .ui-block-b:last").css("background-color", "orange");
-					$(".demandeAmi .ui-block-b:last").click(
-							function(event){
-								$("#buttonDemandeOk").attr("data_id", $(event.currentTarget).attr("data_id"));
-								$("#buttonDemandeKo").attr("data_id", $(event.currentTarget).attr("data_id"));
-								$("#gestionDemande").popup("open", {x:0, y:0});
-							});
+				if(resultat.rows.item(unIt).vue=="true"){
+					$("[data_ami_slider_id="+resultat.rows.item(unIt).id+"]").append('<option value="non">Non visible</option><option selected="selected" value="oui">Visible</option>');
 				}
-				if(resultat.rows.item(unIt).status=="Accept&eacute;"){
-					
-					$(".demandeAmi .ui-block-b:last").css("background-color", "green");
-				}
-				if(resultat.rows.item(unIt).status=="Refus&eacute;"){
-					
-					$(".demandeAmi .ui-block-b:last").css("background-color", "red");
+				else
+				{
+					$("[data_ami_slider_id="+resultat.rows.item(unIt).id+"]").append('<option selected="selected" value="non">Non visible</option><option value="oui">Visible</option>');
 				}
 			}
 		}		
 	}
 	
 	selectAmis(code);
-}*/
+}
