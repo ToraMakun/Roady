@@ -3,6 +3,13 @@ function instanciationAmis(){
 	afficherGroupes();
 	afficherAmis();
 	
+	/*//Quand les interrupteurs change
+	$("[data-role=slider]").on('slidestart', function(event) {alert("Valeur change")});
+	//Appuyer longtemps pour afficher le popup
+	$(".groupName").on('taphold', function(){$("#gestionGroupe").popup("open", {x:0, y:0});});
+	//Appuyer pour voir la fiche
+	$(".ui-block-a").on('tap', afficherFicheAmi);*/
+	
 	$("#boutonRetour .ui-btn-text").text("Retour");
 	$("#boutonRetour").unbind();
 	$("#boutonRetour").click(afficherMenu);
@@ -20,15 +27,19 @@ function afficherGroupes(){
 				$("[data-role=collapsible]:last").append('<h3>'+
 											'<div class="groupName">'+resultat.rows.item(unIt).nom+'</div>'+
 											'<div class="groupVisibility">'+
-												'<select data_group_slider_id="'+resultat.rows.item(unIt).id+'" data-role="slider" data-mini="true">'+
-												'</select>'+
-											'</div></h3>');
+											'</div></h3>').trigger('create');
 				if(resultat.rows.item(unIt).vue=="true"){
-					$("[data-role=slider]:last").append('<option value="non">Non visible</option><option selected="selected" value="oui">Visible</option>');
+					$(".groupVisibility:last").append('<select data_group_slider_id="'+resultat.rows.item(unIt).id+'" data-role="slider" data-mini="true">'+
+														'<option value="non">Non visible</option>'+
+														'<option selected="selected" value="oui">Visible</option>'+
+													'</select>').trigger('create');
 				}
 				else
 				{
-					$("[data-role=slider]:last").append('<option selected="selected" value="non">Non visible</option><option value="oui">Visible</option>');
+					$(".groupVisibility:last").append('<select data_group_slider_id="'+resultat.rows.item(unIt).id+'" data-role="slider" data-mini="true">'+
+														'<option selected="selected" value="non">Non visible</option>'+
+														'<option value="oui">Visible</option>'+
+													'</select>').trigger('create');				
 				}
 			}
 			//Quand les interrupteurs change
@@ -36,7 +47,6 @@ function afficherGroupes(){
 			//Appuyer longtemps pour afficher le popup
 			$(".groupName").on('taphold', function(){$("#gestionGroupe").popup("open", {x:0, y:0});});
 			$("#listContent").collapsibleset( "refresh" );	
-			//$("[data-role=slider]").slider( "refresh" );
 		}
 	}
 	selectGroupes(code);
@@ -51,20 +61,28 @@ function afficherAmis(){
 			for(var unIt=0; unIt<resultat.rows.length; unIt++){
 
 				$("[data_group_id="+resultat.rows.item(unIt).groupe+"] .ui-grid-a").append('<div class="ui-block-a" data_ami_id="'+resultat.rows.item(unIt).id+'"><div class="amiName">'+resultat.rows.item(unIt).prenom+' '+resultat.rows.item(unIt).nom+'</div></div>')
-				$("[data_group_id="+resultat.rows.item(unIt).groupe+"] .ui-grid-a").append('<div class="ui-block-b" data_ami_id="'+resultat.rows.item(unIt).id+'"><div class="amiVisibility"><select data_ami_slider_id="'+resultat.rows.item(unIt).id+'" data-role="slider" data-mini="true"></select></div></div>')
+				$("[data_group_id="+resultat.rows.item(unIt).groupe+"] .ui-grid-a").append('<div class="ui-block-b" data_ami_id="'+resultat.rows.item(unIt).id+'"><div class="amiVisibility"></div></div>').trigger('create');
 				
 				if(resultat.rows.item(unIt).vue=="true"){
-					$("[data_ami_slider_id="+resultat.rows.item(unIt).id+"]").append('<option value="non">Non visible</option><option selected="selected" value="oui">Visible</option>');
+					$("[data_ami_id="+resultat.rows.item(unIt).id+"] .amiVisibility").append('<select data_ami_slider_id="'+resultat.rows.item(unIt).id+'" data-role="slider" data-mini="true">'+
+																						'<option value="non">Non visible</option>'+
+																						'<option selected="selected" value="oui">Visible</option>'+
+																					'</select>').trigger("create");
 				}
 				else
 				{
-					$("[data_ami_slider_id="+resultat.rows.item(unIt).id+"]").append('<option selected="selected" value="non">Non visible</option><option value="oui">Visible</option>');
+					$("[data_ami_id="+resultat.rows.item(unIt).id+"] .amiVisibility").append('<select data_ami_slider_id="'+resultat.rows.item(unIt).id+'" data-role="slider" data-mini="true">'+
+																						'<option selected="selected" value="non">Non visible</option>'+
+																						'<option value="oui">Visible</option>'+
+																					'</select>').trigger("create");				
 				}
 			}
 			//Quand les interrupteurs change
 			$("[data-role=slider]").on('slidestart', function(event) {alert("Valeur change")});
+			//
 			//Appuyer pour voir la fiche
 			$(".ui-block-a").on('tap', function(){afficherFicheAmi($(this).attr("data_ami_id"));});
+			//$("[data-role=slider]").slider( "refresh" );
 		}		
 	}
 	
