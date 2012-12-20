@@ -143,9 +143,7 @@ function majGroupe(id, nom, vue){
 function updateDemandeAmi(id, status){
 
 	db.transaction(function(tx){
-		db.transaction(function(tx){
-			tx.executeSql("update demandeAmi set status=? where id=?", [status, id]);
-		}, errorSql);
+		tx.executeSql("update demandeAmi set status=? where id=?", [status, id]);
 	}, errorSql);
 }
 
