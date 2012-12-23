@@ -104,7 +104,7 @@ function changerVisibilite(event){
 	{
 		var groupId=$(event.currentTarget).attr("data_group_slider_id");
 		var groupVisibilite=($(event.currentTarget).val()=="oui")?true:false;
-		updateGroupe(groupId, groupVisibilite);
+		updateGroupeVisibilite(groupId, groupVisibilite);
 
 		$("[data_group_id="+groupId+"] .amiVisibility [data-role=slider]").val($(event.currentTarget).val());
 		$("[data_group_id="+groupId+"] .amiVisibility [data-role=slider]").trigger("slidestop");
@@ -127,5 +127,31 @@ function supprimerGroupe(){
 }
 
 function changerNomGroupe(){
-	alert("poule");
+
+	var leNom=HTMLEncode($("input").val());
+	
+	if(leNom.length!=0 && leNom.length<21)
+	{
+		updateGroupeNom($("#gestionGroupe").attr("data_group_id"), leNom);
+		$("[data_group_id="+$("#gestionGroupe").attr("data_group_id")+"] .groupName").text(leNom);
+		$("#gestionGroupe").popup("close");
+		$("#dialogChangerNomGroupe").dialog("close");
+	}
+	else
+	{
+		alert("Nom non autorisé");
+	}
+}
+
+function HTMLEncode(wText){
+	if(typeof(wText)!="string")
+	{
+		wText=wText.toString();
+	}
+	wText=wText.replace(/&/g, "&amp;") ;
+	wText=wText.replace(/"/g, "&quot;") ;
+	wText=wText.replace(/</g, "&lt;") ;
+	wText=wText.replace(/>/g, "&gt;") ;
+	wText=wText.replace(/'/g, "&#146;") ;
+	return wText;
 }

@@ -154,10 +154,17 @@ function deleteGroupe(id){
 	}, errorSql);
 }
 
-function updateGroupe(id, visibilite){
+function updateGroupeVisibilite(id, visibilite){
 
 	db.transaction(function(tx){
 		tx.executeSql("update groupe set vue=? where id=?", [visibilite, id]);
+	}, errorSql);
+}
+
+function updateGroupeNom(id, nom){
+
+	db.transaction(function(tx){
+		tx.executeSql("update groupe set nom=? where id=?", [nom, id]);
 	}, errorSql);
 }
 
