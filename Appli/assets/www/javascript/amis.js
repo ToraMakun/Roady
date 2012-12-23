@@ -3,8 +3,10 @@ function instanciationAmis(){
 	afficherGroupes();
 	afficherListeAmis();
 	
-	$("#boutonChangerNomGroupe").click(function(){});
 	$("#boutonSupprGroupe").click(supprimerGroupe);
+	
+	$("#boutonOkDialogChangerNomGroupe").click(changerNomGroupe);
+	$("#boutonKoDialogChangerNomGroupe").click(function(){$("#dialogChangerNomGroupe").dialog("close");});
 	
 	$("#boutonRetour .ui-btn-text").text("Retour");
 	$("#boutonRetour").unbind();
@@ -122,4 +124,8 @@ function supprimerGroupe(){
 	$("[data_group_id="+idGroupeSuppr+"]").remove();
 	$("#listContent").collapsibleset("refresh");
 	$("#gestionGroupe").popup("close");
+}
+
+function changerNomGroupe(){
+	alert("poule");
 }

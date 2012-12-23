@@ -9,7 +9,7 @@
 	float: right;
 }
 
-.ui-block-a, .ui-block-b{
+[data_group_id] .ui-block-a, [data_group_id] .ui-block-b{
 	border-bottom-style:solid;
 	border-width:thin;
 	margin-top: 10px;

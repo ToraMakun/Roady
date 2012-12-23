@@ -73,6 +73,7 @@ function afficherAmis(){
 		success: function(data){
 			$("#contener *").remove();
 			$("#contener").append(data);
+			$("#dialogChangerNomGroupe").remove().insertAfter("#page");
 			instanciationAmis();
 			$("#page").page("destroy").page();
 		},
