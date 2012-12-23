@@ -7,7 +7,7 @@ function instanciationAjoutAmi(){
 	$("#boutonRetour").click(afficherMenu);
 }
 
-function testsNouvelleDemandeAmi(){
+function nouvelleDemandeAmi(){
 	
 	var leLogin=HTMLEncode($("input").val());
 	

@@ -3,6 +3,10 @@ var db=null;
 function createDB(){
 	db = window.openDatabase("baseRoads", "2.0", "Roads DB", 1000000);
 	db.transaction(function(tx){
+		/*tx.executeSql("drop table demandeAmi");
+		tx.executeSql("drop table ami");
+		tx.executeSql("drop table utilisateur");
+		tx.executeSql("drop table groupe");*/
 		tx.executeSql("create table if not exists groupe (" +
 				"id integer not null constraint PKgroupe primary key autoincrement," +
 				"nom varchar(20) not null constraint Ugroupe_login unique," +
@@ -17,7 +21,7 @@ function createDB(){
 				"telephone varchar(10) not null," +
 				"latitude double(15, 12) null default null," +
 				"longitude double(15, 12) null default null," +
-				"groupe integer null default null constraint FKami_groupeANDgroupe_id references groupe(id) on delete set null," +
+				"groupe integer not null default 0 constraint FKami_groupeANDgroupe_id references groupe(id) on delete set null," +
 				"vue boolean not null default true)"
 		);
 		tx.executeSql("create table if not exists demandeAmi (" +
@@ -31,6 +35,9 @@ function createDB(){
 				"login varchar(20) not null constraint Uutilisateur_login unique," +
 				"message varchar(20) not null default '')"
 		);
+		db.transaction(function(tx){
+			tx.executeSql("insert or ignore into groupe(id, nom) values(?, ?)", [0, "Nouveaux amis"]);
+		}, errorSql);
 		//deleteAmis();
 		//deleteDemandesAmis();
 		insertGroupe("Groupe 1");
@@ -140,16 +147,28 @@ function deleteDemandesAmis(){
 		tx.executeSql('delete FROM demandeAmi');
 	}, errorSql);
 }
-/*
-function majGroupe(id, nom, vue){
+
+function updateGroupe(id, visibilite){
 
 	db.transaction(function(tx){
-		db.transaction(function(tx){
-			tx.executeSql("update groupe set nom=?, vue=? where id=?", [nom, vue, id]);
-		}, errorSql);
+		tx.executeSql("update groupe set vue=? where id=?", [visibilite, id]);
 	}, errorSql);
 }
-*/
+
+function updateAmi(id, visibilite){
+
+	db.transaction(function(tx){
+		tx.executeSql("update ami set vue=? where id=?", [visibilite, id]);
+	}, errorSql);
+}
+
+function updateAmiParGroup(idGroupe, visibilite){
+
+	db.transaction(function(tx){
+		tx.executeSql("update ami set vue=? where groupe=?", [visibilite, idGroupe]);
+	}, errorSql);
+}
+
 function updateDemandeAmi(id, status){
 
 	db.transaction(function(tx){

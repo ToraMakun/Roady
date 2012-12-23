@@ -1,14 +1,7 @@
 function instanciationAmis(){
 
 	afficherGroupes();
-	afficherAmis();
-	
-	/*//Quand les interrupteurs change
-	$("[data-role=slider]").on('slidestart', function(event) {alert("Valeur change")});
-	//Appuyer longtemps pour afficher le popup
-	$(".groupName").on('taphold', function(){$("#gestionGroupe").popup("open", {x:0, y:0});});
-	//Appuyer pour voir la fiche
-	$(".ui-block-a").on('tap', afficherFicheAmi);*/
+	afficherListeAmis();
 	
 	$("#boutonRetour .ui-btn-text").text("Retour");
 	$("#boutonRetour").unbind();
@@ -27,7 +20,7 @@ function afficherGroupes(){
 				$("[data-role=collapsible]:last").append('<h3>'+
 											'<div class="groupName">'+resultat.rows.item(unIt).nom+'</div>'+
 											'<div class="groupVisibility">'+
-											'</div></h3>').trigger('create');
+											'</div></h3><div class="ui-grid-a"></div>').trigger('create');
 				if(resultat.rows.item(unIt).vue=="true"){
 					$(".groupVisibility:last").append('<select data_group_slider_id="'+resultat.rows.item(unIt).id+'" data-role="slider" data-mini="true">'+
 														'<option value="non">Non visible</option>'+
@@ -43,16 +36,16 @@ function afficherGroupes(){
 				}
 			}
 			//Quand les interrupteurs change
-			$("[data-role=slider]").on('slidestart', function(event) {alert("Valeur change")});
+			$("[data-role=slider]").on('slidestop', function(event) {changerVisibilite(event);});
 			//Appuyer longtemps pour afficher le popup
-			$(".groupName").on('taphold', function(){$("#gestionGroupe").popup("open", {x:0, y:0});});
+			$(".groupName:not([data_group_id=0] .groupName)").on('taphold', function(){$("#gestionGroupe").popup("open", {x:0, y:0});});
 			$("#listContent").collapsibleset( "refresh" );	
 		}
 	}
 	selectGroupes(code);
 }
 
-function afficherAmis(){
+function afficherListeAmis(){
 	
 	var code=function(resultat)
 	{
@@ -78,13 +71,32 @@ function afficherAmis(){
 				}
 			}
 			//Quand les interrupteurs change
-			$("[data-role=slider]").on('slidestart', function(event) {alert("Valeur change")});
+			$("[data-role=slider]").on('slidestop', function(event) {changerVisibilite(event);});
 			//
 			//Appuyer pour voir la fiche
 			$(".ui-block-a").on('tap', function(){afficherFicheAmi($(this).attr("data_ami_id"));});
-			//$("[data-role=slider]").slider( "refresh" );
 		}		
 	}
 	
 	selectAmis(code);
+}
+
+function changerVisibilite(event){
+
+	if($(event.currentTarget).attr("data_ami_slider_id")==undefined)
+	{
+		var groupId=$(event.currentTarget).attr("data_group_slider_id");
+		var groupVisibilite=($(event.currentTarget).val()=="oui")?true:false;
+		updateGroupe(groupId, groupVisibilite);
+		//updateAmiParGroup(groupId, groupVisibilite);
+
+		//afficherAmis();
+		$("[data_group_id="+groupId+"] [data-role=slider]").trigger("slidestop");
+	}
+	else
+	{
+		var amiId=$(event.currentTarget).attr("data_ami_slider_id");
+		var amiVisibilite=($(event.currentTarget).val()=="oui")?true:false;
+		updateAmi(amiId, amiVisibilite);
+	}
 }
