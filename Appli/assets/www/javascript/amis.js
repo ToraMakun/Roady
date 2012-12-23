@@ -35,6 +35,7 @@ function afficherGroupes(){
 													'</select>').trigger('create');				
 				}
 			}
+			$("[data_group_id=0]").remove().insertBefore($("[data-role=collapsible]:first"));
 			//Quand les interrupteurs change
 			$("[data-role=slider]").on('slidestop', function(event) {changerVisibilite(event);});
 			//Appuyer longtemps pour afficher le popup
