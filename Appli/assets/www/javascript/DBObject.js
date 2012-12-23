@@ -142,6 +142,12 @@ function deleteAmis(){
 	}, errorSql);
 }
 
+function deleteAmisParId(id){
+	db.transaction(function(tx){
+		tx.executeSql('delete FROM ami where id=?', [id]);
+	}, errorSql);
+}
+
 function deleteDemandesAmis(){
 	db.transaction(function(tx){
 		tx.executeSql('delete FROM demandeAmi');

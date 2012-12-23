@@ -11,7 +11,7 @@ function instanciationFicheAmi(idAmi){
 	$("#boutonOkDialogChanger").click(function(){alert("A faire");});
 	$("#boutonKoDialogChanger").click(function(){$("#dialogChanger").dialog("close");});
 	
-	$("#boutonOkDialogSuppr").click(function(){alert("A faire");});
+	$("#boutonOkDialogSuppr").click(function(){supprimerAmi(idAmi);});
 	$("#boutonKoDialogSuppr").click(function(){$("#dialogSuppr").dialog("close");});
 	
 	$("#boutonRetour .ui-btn-text").text("Retour");
@@ -33,4 +33,11 @@ function afficherAmi(idAmi){
 	}
 	
 	selectAmiParId(idAmi, code);
+}
+
+function supprimerAmi(idAmi){
+	
+	deleteAmisParId(idAmi);
+	$("#dialogSuppr").dialog("close");
+	afficherAmis();
 }
