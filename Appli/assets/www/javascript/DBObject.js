@@ -148,6 +148,12 @@ function deleteDemandesAmis(){
 	}, errorSql);
 }
 
+function deleteGroupe(id){
+	db.transaction(function(tx){
+		tx.executeSql('delete FROM groupe where id=?', [id]);
+	}, errorSql);
+}
+
 function updateGroupe(id, visibilite){
 
 	db.transaction(function(tx){

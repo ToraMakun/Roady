@@ -3,6 +3,9 @@ function instanciationAmis(){
 	afficherGroupes();
 	afficherListeAmis();
 	
+	$("#boutonChangerNomGroupe").click(function(){});
+	$("#boutonSupprGroupe").click(supprimerGroupe);
+	
 	$("#boutonRetour .ui-btn-text").text("Retour");
 	$("#boutonRetour").unbind();
 	$("#boutonRetour").click(afficherMenu);
@@ -39,8 +42,13 @@ function afficherGroupes(){
 			//Quand les interrupteurs change
 			$("[data-role=slider]").on('slidestop', function(event) {changerVisibilite(event);});
 			//Appuyer longtemps pour afficher le popup
-			$(".groupName:not([data_group_id=0] .groupName)").on('taphold', function(){$("#gestionGroupe").popup("open", {x:0, y:0});});
-			$("#listContent").collapsibleset( "refresh" );	
+			$(".groupName:not([data_group_id=0] .groupName)").on('taphold', function(event){
+				$("#gestionGroupe").attr("data_group_id", $(event.currentTarget).parents("[data_group_id]").attr("data_group_id"));
+				$("#gestionGroupe").popup("open", {x:0, y:0});
+			});
+			$("#listContent").collapsibleset( "refresh" );
+			
+			
 		}
 	}
 	selectGroupes(code);
@@ -73,7 +81,7 @@ function afficherListeAmis(){
 			}
 			//Quand les interrupteurs change
 			$("[data-role=slider]").on('slidestop', function(event) {changerVisibilite(event);});
-			//
+
 			//Appuyer pour voir la fiche
 			$(".ui-block-a").on('tap', function(){afficherFicheAmi($(this).attr("data_ami_id"));});
 		}		
@@ -100,4 +108,12 @@ function changerVisibilite(event){
 		var amiVisibilite=($(event.currentTarget).val()=="oui")?true:false;
 		updateAmi(amiId, amiVisibilite);
 	}
+}
+
+function supprimerGroupe(){
+	var idGroupeSuppr=$("#gestionGroupe").attr("data_group_id");
+	deleteGroupe(idGroupeSuppr);
+	$("[data_group_id="+idGroupeSuppr+"]").remove();
+	$("#listContent").collapsibleset("refresh");
+	$("#gestionGroupe").popup("close");
 }
