@@ -88,10 +88,10 @@ function changerVisibilite(event){
 		var groupId=$(event.currentTarget).attr("data_group_slider_id");
 		var groupVisibilite=($(event.currentTarget).val()=="oui")?true:false;
 		updateGroupe(groupId, groupVisibilite);
-		//updateAmiParGroup(groupId, groupVisibilite);
 
-		//afficherAmis();
-		$("[data_group_id="+groupId+"] [data-role=slider]").trigger("slidestop");
+		$("[data_group_id="+groupId+"] .amiVisibility [data-role=slider]").val($(event.currentTarget).val());
+		$("[data_group_id="+groupId+"] .amiVisibility [data-role=slider]").trigger("slidestop");
+		$("[data_group_id="+groupId+"] .amiVisibility [data-role=slider]").slider("refresh");
 	}
 	else
 	{
