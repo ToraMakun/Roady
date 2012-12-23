@@ -19,33 +19,39 @@ function afficherGroupes(){
 		{
 			for(var unIt=0; unIt<resultat.rows.length; unIt++){
 				
-				$("#listContent").append('<div data_group_id="'+resultat.rows.item(unIt).id+'" data-role="collapsible"></div>');
-				$("[data-role=collapsible]:last").append('<h3>'+
+				var id=resultat.rows.item(unIt).id;
+				if(id==0){
+					$("#listContent").prepend('<div data_group_id="'+id+'" data-role="collapsible"></div>');
+				}else{
+					$("#listContent").append('<div data_group_id="'+id+'" data-role="collapsible"></div>');
+				}
+				$("[data_group_id="+id+"]").append('<h3>'+
 											'<div class="groupName">'+resultat.rows.item(unIt).nom+'</div>'+
 											'<div class="groupVisibility">'+
 											'</div></h3><div class="ui-grid-a"></div>').trigger('create');
 				if(resultat.rows.item(unIt).vue=="true"){
-					$(".groupVisibility:last").append('<select data_group_slider_id="'+resultat.rows.item(unIt).id+'" data-role="slider" data-mini="true">'+
+					$("[data_group_id="+id+"] .groupVisibility").append('<select data_group_slider_id="'+resultat.rows.item(unIt).id+'" data-role="slider" data-mini="true">'+
 														'<option value="non">Non visible</option>'+
 														'<option selected="selected" value="oui">Visible</option>'+
 													'</select>').trigger('create');
 				}
 				else
 				{
-					$(".groupVisibility:last").append('<select data_group_slider_id="'+resultat.rows.item(unIt).id+'" data-role="slider" data-mini="true">'+
+					$("[data_group_id="+id+"] .groupVisibility").append('<select data_group_slider_id="'+resultat.rows.item(unIt).id+'" data-role="slider" data-mini="true">'+
 														'<option selected="selected" value="non">Non visible</option>'+
 														'<option value="oui">Visible</option>'+
 													'</select>').trigger('create');				
 				}
 			}
-			$("[data_group_id=0]").remove().insertBefore($("[data-role=collapsible]:first"));
 			//Quand les interrupteurs change
 			$("[data-role=slider]").on('slidestop', function(event) {changerVisibilite(event);});
 			//Appuyer longtemps pour afficher le popup
 			$(".groupName:not([data_group_id=0] .groupName)").on('taphold', function(event){
+				//alert($(event.currentTarget)
 				$("#gestionGroupe").attr("data_group_id", $(event.currentTarget).parents("[data_group_id]").attr("data_group_id"));
 				$("#gestionGroupe").popup("open", {x:0, y:0});
 			});
+			//$("[data-role=slider]").slider( "refresh" );
 			$("#listContent").collapsibleset( "refresh" );
 			
 			
