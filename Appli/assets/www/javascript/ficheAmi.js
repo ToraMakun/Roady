@@ -30,6 +30,11 @@ function afficherAmi(idAmi){
 			$("#nom").text(resultat.rows.item(0).nom);
 			$("#mail").text(resultat.rows.item(0).mail);
 			$("#telephone").text(resultat.rows.item(0).telephone);
+			
+			if(resultat.rows.item(0).latitude==null)
+			{
+				$("#boutonAfficher").button("disable");
+			}
 		}		
 	}
 	

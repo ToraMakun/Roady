@@ -42,17 +42,25 @@ function createDB(){
 		//deleteDemandesAmis();
 		insertGroupe("Groupe 1");
 		insertGroupe("Groupe 2");
-		insertAmi("Toule", "Poule", "Poule", "poule@poule.fr", "0405040504", 46.391094, -0.421225);
-		insertAmi("Tiule", "Pyule", "Pyule", "pyule@pyule.fr", "0546548752", 46.582665, 0.334594);
+		//insertAmi("Toule", "Poule", "Poule", "poule@poule.fr", "0405040504", 46.391094, -0.421225);
+		//insertAmi("Tiule", "Pyule", "Pyule", "pyule@pyule.fr", "0546548752", 46.582665, 0.334594);
+		insertAmi("Toule", "Piule", "Piule", "piule@piule.fr", "0546548752");
 		insertDemandeAmi("Plouah", true);
 		insertDemandeAmi("Pliuah", false);
 	}, errorSql);
 }
 
 //NON CONFORME A LA VERSION FINALE
-function insertAmi(login, nom, prenom, mail, telephone, latitude, longitude){
+/*function insertAmi(login, nom, prenom, mail, telephone, latitude, longitude){
 	db.transaction(function(tx){
 		tx.executeSql("insert or ignore into ami(login, nom, prenom, mail, telephone, latitude, longitude) values(?, ?, ?, ?, ?, ?, ?)", [login, nom, prenom, mail, telephone, latitude, longitude]);
+	}, errorSql);
+}*/
+
+//CONFORME A LA VERSION FINALE
+function insertAmi(login, nom, prenom, mail, telephone){
+	db.transaction(function(tx){
+		tx.executeSql("insert or ignore into ami(login, nom, prenom, mail, telephone) values(?, ?, ?, ?, ?)", [login, nom, prenom, mail, telephone]);
 	}, errorSql);
 }
 
