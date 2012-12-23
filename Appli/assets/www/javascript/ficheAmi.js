@@ -1,6 +1,7 @@
 function instanciationFicheAmi(idAmi){
 
 	afficherAmi(idAmi);
+	afficherGroupe();
 	
 	$("#boutonAfficher").click(function(){
 		
@@ -8,8 +9,8 @@ function instanciationFicheAmi(idAmi){
 		afficherMap($("#prenom").text()+" "+$("#nom").text());
 	});
 	
-	$("#boutonOkDialogChanger").click(function(){alert("A faire");});
-	$("#boutonKoDialogChanger").click(function(){$("#dialogChanger").dialog("close");});
+	$("#boutonOkDialogChangerGroupe").click(function(){changerGroupe(idAmi);});
+	$("#boutonKoDialogChangerGroupe").click(function(){$("#dialogChanger").dialog("close");});
 	
 	$("#boutonOkDialogSuppr").click(function(){supprimerAmi(idAmi);});
 	$("#boutonKoDialogSuppr").click(function(){$("#dialogSuppr").dialog("close");});
@@ -35,8 +36,33 @@ function afficherAmi(idAmi){
 	selectAmiParId(idAmi, code);
 }
 
+function afficherGroupe(){
+	
+	var code=function(resultat)
+	{
+		if(resultat.rows.length!=0)
+		{
+			for(var unIt=0; unIt<resultat.rows.length; unIt++){
+				
+				var id=resultat.rows.item(unIt).id;
+				$("#listeGroupe").append("<option value='"+id+"'>"+resultat.rows.item(unIt).nom+"</option>");
+			}
+		}	
+	}
+	
+	selectGroupes(code);
+}
+
+function changerGroupe(idAmi){
+	
+	updateAmiGroupe(idAmi, $("#listeGroupe").val());
+	$("#dialogChangerGroupe").dialog("close");
+	afficherAmis();
+}
+
 function supprimerAmi(idAmi){
 	
+	//Prévenir le serveur aussi
 	deleteAmisParId(idAmi);
 	$("#dialogSuppr").dialog("close");
 	afficherAmis();

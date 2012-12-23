@@ -140,7 +140,7 @@ function afficherFicheAmi(idAmi){
 			$("#contener *").remove();
 			$("#contener").append(data);
 			//Place les pages dialogue au bon endroit dans index
-			$("#dialogChanger").remove().insertAfter("#page");
+			$("#dialogChangerGroupe").remove().insertAfter("#page");
 			$("#dialogSuppr").remove().insertAfter("#page");
 			instanciationFicheAmi(idAmi);
 			$("#page").page("destroy").page();

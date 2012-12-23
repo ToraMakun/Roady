@@ -121,6 +121,7 @@ function changerVisibilite(event){
 function supprimerGroupe(){
 	var idGroupeSuppr=$("#gestionGroupe").attr("data_group_id");
 	deleteGroupe(idGroupeSuppr);
+	updateAmiSupprGroupe(idGroupeSuppr);
 	$("[data_group_id="+idGroupeSuppr+"]").remove();
 	$("#listContent").collapsibleset("refresh");
 	$("#gestionGroupe").popup("close");

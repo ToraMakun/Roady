@@ -21,7 +21,7 @@ function createDB(){
 				"telephone varchar(10) not null," +
 				"latitude double(15, 12) null default null," +
 				"longitude double(15, 12) null default null," +
-				"groupe integer not null default 0 constraint FKami_groupeANDgroupe_id references groupe(id) on delete set null," +
+				"groupe integer not null default 0 constraint FKami_groupeANDgroupe_id references groupe(id) on delete set default," +
 				"vue boolean not null default true)"
 		);
 		tx.executeSql("create table if not exists demandeAmi (" +
@@ -185,6 +185,20 @@ function updateAmiParGroup(idGroupe, visibilite){
 
 	db.transaction(function(tx){
 		tx.executeSql("update ami set vue=? where groupe=?", [visibilite, idGroupe]);
+	}, errorSql);
+}
+
+function updateAmiGroupe(idAmi, idGroupe){
+
+	db.transaction(function(tx){
+		tx.executeSql("update ami set groupe=? where id=?", [idGroupe, idAmi]);
+	}, errorSql);
+}
+
+function updateAmiSupprGroupe(idGroupe){
+
+	db.transaction(function(tx){
+		tx.executeSql("update ami set groupe=0 where groupe=?", [idGroupe]);
 	}, errorSql);
 }
 
