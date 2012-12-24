@@ -6,7 +6,7 @@ var map=null;
 function instanciationMap(){
 
 	$("#boutonCentrer").click(centrerCarte);
-	$("#rechercher").blur(lancerRecherche);
+	$("#formRecherche").submit(function(){lancerRecherche(); return false;});
 	
 	$("#boutonTracer").click(function(event){tracerRoute(event); $("#bulle").popup("close");});
 	$("#boutonRefresh").click(
@@ -75,9 +75,13 @@ function afficherMarkersAmis(){
 			if(resultat.length!=0){
 				for(var i=0;i<resultat.rows.length;i++)
 				{
-					placerMarker(resultat.rows.item(i).latitude,
+					//alert(resultat.rows.item(i).prenom+" "+resultat.rows.item(i).latitude);
+					if(resultat.rows.item(i).latitude!=null)
+					{
+						placerMarker(resultat.rows.item(i).latitude,
 								resultat.rows.item(i).longitude,
 								resultat.rows.item(i).prenom+" "+resultat.rows.item(i).nom); 
+					}
 				}
 			}
 			else
@@ -152,31 +156,34 @@ function tracerRoute(event){
 
 function lancerRecherche(){
 
-	var leNom=HTMLEncode($("input").val());
-	
-	if(leNom.length!=0 && leNom.length<21)
-	{
-		var code=function(resultat){
-			
-			if(resultat.rows.length!=0)
-			{
-				for(var i=0;i<resultat.rows.length;i++)
+		var leNom=HTMLEncode($("input").val());
+		
+		if(leNom.length!=0 && leNom.length<21)
+		{
+			unsetMarkers();
+			var code=function(resultat){
+				if(resultat.rows.length!=0)
 				{
-					placerMarker(resultat.rows.item(i).latitude,
-								resultat.rows.item(i).longitude,
-								resultat.rows.item(i).prenom+" "+resultat.rows.item(i).nom); 
+					for(var i=0;i<resultat.rows.length;i++)
+					{
+						if(resultat.rows.item(i).latitude!=null)
+						{
+							placerMarker(resultat.rows.item(i).latitude,
+									resultat.rows.item(i).longitude,
+									resultat.rows.item(i).prenom+" "+resultat.rows.item(i).nom); 
+						}
+					}
 				}
 			}
+			
+			selectAmisRecherche(leNom, code);
 		}
-		
-		selectAmisRecherche(code);
+		else
+		{
+			unsetMarkers();
+			afficherMarkersAmis();
+		}
 	}
-	else
-	{
-		unsetMarkers();
-		afficherMarkersAmis();
-	}
-}
 
 //Cherche le marker selon le nom de l'utilisateur
 function getMarker(unTitre){
