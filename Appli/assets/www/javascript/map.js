@@ -6,6 +6,8 @@ var map=null;
 function instanciationMap(){
 
 	$("#boutonCentrer").click(centrerCarte);
+	$("#rechercher").blur(lancerRecherche);
+	
 	$("#boutonTracer").click(function(event){tracerRoute(event); $("#bulle").popup("close");});
 	$("#boutonRefresh").click(
 			function(){
@@ -48,7 +50,7 @@ function initialiserCarte(){
 			};
 			map = new google.maps.Map(document.getElementById('map'), myOptions);
 			placerMarker(latLng.lat(), latLng.lng(), "Moi");
-			afficherAmis();
+			afficherMarkersAmis();
 		},
 		function(error) {
 			var latLng = new google.maps.LatLng(48.269026,4.066694);
@@ -66,7 +68,7 @@ function initialiserCarte(){
 }
 
 //Va chercher les amis dans la base et place les markers
-function afficherAmis(){
+function afficherMarkersAmis(){
 
 	selectAmis(
 		function(resultat){
@@ -148,6 +150,34 @@ function tracerRoute(event){
 	});
 }
 
+function lancerRecherche(){
+
+	var leNom=HTMLEncode($("input").val());
+	
+	if(leNom.length!=0 && leNom.length<21)
+	{
+		var code=function(resultat){
+			
+			if(resultat.rows.length!=0)
+			{
+				for(var i=0;i<resultat.rows.length;i++)
+				{
+					placerMarker(resultat.rows.item(i).latitude,
+								resultat.rows.item(i).longitude,
+								resultat.rows.item(i).prenom+" "+resultat.rows.item(i).nom); 
+				}
+			}
+		}
+		
+		selectAmisRecherche(code);
+	}
+	else
+	{
+		unsetMarkers();
+		afficherMarkersAmis();
+	}
+}
+
 //Cherche le marker selon le nom de l'utilisateur
 function getMarker(unTitre){
 	for(var unIt=0; unIt<listeMarkers.length; unIt++)
@@ -166,4 +196,17 @@ function unsetMarkers(){
 		listeMarkers[unIt].setMap(null);
 	}
 	listeMarkers=new Array();
+}
+
+function HTMLEncode(wText){
+	if(typeof(wText)!="string")
+	{
+		wText=wText.toString();
+	}
+	wText=wText.replace(/&/g, "&amp;") ;
+	wText=wText.replace(/"/g, "&quot;") ;
+	wText=wText.replace(/</g, "&lt;") ;
+	wText=wText.replace(/>/g, "&gt;") ;
+	wText=wText.replace(/'/g, "&#146;") ;
+	return wText;
 }

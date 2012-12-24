@@ -103,6 +103,15 @@ function selectAmiParId(id, code){
 	}, errorSql);
 }
 
+function selectAmisRecherche(recherche, code){
+
+	db.transaction(function(tx){
+		tx.executeSql('SELECT * FROM ami where prenom like ? or nom like ?', [recherche], function(tx, results){
+				code(results);
+		}, errorSql);
+	}, errorSql);
+}
+
 function selectDemandesAmis(code){
 
 	db.transaction(function(tx){
@@ -143,6 +152,23 @@ function demandeAmiExiste(unLogin){
 		}, errorSql);
 	}, errorSql);
 }
+
+function groupeExiste(unNom){
+
+	db.transaction(function(tx){
+		tx.executeSql('SELECT nom FROM groupe where nom=?', [unNom], function(tx, results){
+				if(results.rows.length==0)
+				{
+					return false;
+				}
+				else
+				{
+					return true;
+				}
+		}, errorSql);
+	}, errorSql);
+}
+
 
 function deleteAmis(){
 	db.transaction(function(tx){

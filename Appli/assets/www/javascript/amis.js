@@ -131,7 +131,7 @@ function changerNomGroupe(){
 
 	var leNom=HTMLEncode($("input").val());
 	
-	if(leNom.length!=0 && leNom.length<21)
+	if(leNom.length!=0 && leNom.length<21 && groupeExiste(leNom))
 	{
 		updateGroupeNom($("#gestionGroupe").attr("data_group_id"), leNom);
 		$("[data_group_id="+$("#gestionGroupe").attr("data_group_id")+"] .groupName").text(leNom);
@@ -140,7 +140,7 @@ function changerNomGroupe(){
 	}
 	else
 	{
-		alert("Nom non autorisé");
+		alert("Nom non autoris&eacute;");
 	}
 }
 

@@ -5,12 +5,11 @@ function instanciationFicheAmi(idAmi){
 	
 	$("#boutonAfficher").click(function(){
 		
-		//Tester si on a une position dans la base, si pas => disable
 		afficherMap($("#prenom").text()+" "+$("#nom").text());
 	});
 	
 	$("#boutonOkDialogChangerGroupe").click(function(){changerGroupe(idAmi);});
-	$("#boutonKoDialogChangerGroupe").click(function(){$("#dialogChanger").dialog("close");});
+	$("#boutonKoDialogChangerGroupe").click(function(){$("#dialogChangerGroupe").dialog("close");});
 	
 	$("#boutonOkDialogSuppr").click(function(){supprimerAmi(idAmi);});
 	$("#boutonKoDialogSuppr").click(function(){$("#dialogSuppr").dialog("close");});
