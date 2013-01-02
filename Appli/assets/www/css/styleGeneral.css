@@ -1,14 +1,17 @@
 @CHARSET "ISO-8859-1";
 
+/* Positionnement header */
 div[data-role="header"]{
 	text-align: center;
 	font-size: 30px;
 }
 
+/* Positionnement footer */
 div[data-role="footer"]{
 	text-align: center;
 }
 
+/* Positionnement bouton retour dans le footer */
 #boutonRetour{
 	display: block;
 	float: left;

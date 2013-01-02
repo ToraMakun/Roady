@@ -1,9 +1,11 @@
 @CHARSET "ISO-8859-1";
 
 @media all  {
+	/* Taille header du popup gestionDemande*/
 	#gestionDemande div[data-role="header"]{
 		font-size: 20px;
 	}
+	/* Change la taille du bloc et ajoute une bordure */
 	.demandeAmi .ui-block-a {
 		width: 75%;
 		border-bottom-style:solid;
@@ -17,6 +19,7 @@
 		border-width:thin;
 		margin-top: 10px;
 	}
-	.demandeAmi .ui-block-a { clear: left; }
+	.demandeAmi .ui-block-a {
+		clear: left;
 	}
 }

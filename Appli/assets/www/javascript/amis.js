@@ -1,13 +1,17 @@
 function instanciationAmis(){
 
+	//Affiche la page de manière dynamique
 	afficherGroupes();
 	afficherListeAmis();
 	
+	// Gestion du bouton du popup gestionGroupe
 	$("#boutonSupprGroupe").click(supprimerGroupe);
 	
+	// Gestion des bouton de la page dialog changerGroupe
 	$("#boutonOkDialogChangerNomGroupe").click(changerNomGroupe);
 	$("#boutonKoDialogChangerNomGroupe").click(function(){$("#dialogChangerNomGroupe").dialog("close");});
 	
+	//Gestion du bouton retuour
 	$("#boutonRetour .ui-btn-text").text("Retour");
 	$("#boutonRetour").unbind();
 	$("#boutonRetour").click(afficherMenu);
@@ -22,15 +26,21 @@ function afficherGroupes(){
 			for(var unIt=0; unIt<resultat.rows.length; unIt++){
 				
 				var id=resultat.rows.item(unIt).id;
+				
+				//Si c'est le groupe "Nouveaux amis", on le place au début
 				if(id==0){
 					$("#listContent").prepend('<div data_group_id="'+id+'" data-role="collapsible"></div>');
 				}else{
 					$("#listContent").append('<div data_group_id="'+id+'" data-role="collapsible"></div>');
 				}
+				
+				//On place un nouvel onglet avec le nom du groupe
 				$("[data_group_id="+id+"]").append('<h3>'+
 											'<div class="groupName">'+resultat.rows.item(unIt).nom+'</div>'+
 											'<div class="groupVisibility">'+
 											'</div></h3><div class="ui-grid-a"></div>').trigger('create');
+				
+				//On ajoute le switch avec la valeur correspondante
 				if(resultat.rows.item(unIt).vue=="true"){
 					$("[data_group_id="+id+"] .groupVisibility").append('<select data_group_slider_id="'+resultat.rows.item(unIt).id+'" data-role="slider" data-mini="true">'+
 														'<option value="non">Non visible</option>'+
@@ -45,18 +55,18 @@ function afficherGroupes(){
 													'</select>').trigger('create');				
 				}
 			}
+			
 			//Quand les interrupteurs change
 			$("[data-role=slider]").on('slidestop', function(event) {changerVisibilite(event);});
+			
 			//Appuyer longtemps pour afficher le popup
 			$(".groupName:not([data_group_id=0] .groupName)").on('taphold', function(event){
-				//alert($(event.currentTarget)
 				$("#gestionGroupe").attr("data_group_id", $(event.currentTarget).parents("[data_group_id]").attr("data_group_id"));
 				$("#gestionGroupe").popup("open", {x:0, y:0});
 			});
-			//$("[data-role=slider]").slider( "refresh" );
-			$("#listContent").collapsibleset( "refresh" );
-			
-			
+
+			//Remet tout en place avec JQM
+			$("#listContent").collapsibleset( "refresh" );			
 		}
 	}
 	selectGroupes(code);
@@ -70,9 +80,11 @@ function afficherListeAmis(){
 		{
 			for(var unIt=0; unIt<resultat.rows.length; unIt++){
 
+				//On place une ligne ami
 				$("[data_group_id="+resultat.rows.item(unIt).groupe+"] .ui-grid-a").append('<div class="ui-block-a" data_ami_id="'+resultat.rows.item(unIt).id+'"><div class="amiName">'+resultat.rows.item(unIt).prenom+' '+resultat.rows.item(unIt).nom+'</div></div>')
 				$("[data_group_id="+resultat.rows.item(unIt).groupe+"] .ui-grid-a").append('<div class="ui-block-b" data_ami_id="'+resultat.rows.item(unIt).id+'"><div class="amiVisibility"></div></div>').trigger('create');
 				
+				//On ajoute le switch avec la valeur correspondante
 				if(resultat.rows.item(unIt).vue=="true"){
 					$("[data_ami_id="+resultat.rows.item(unIt).id+"] .amiVisibility").append('<select data_ami_slider_id="'+resultat.rows.item(unIt).id+'" data-role="slider" data-mini="true">'+
 																						'<option value="non">Non visible</option>'+
@@ -87,6 +99,7 @@ function afficherListeAmis(){
 																					'</select>').trigger("create");				
 				}
 			}
+			
 			//Quand les interrupteurs change
 			$("[data-role=slider]").on('slidestop', function(event) {changerVisibilite(event);});
 
@@ -98,19 +111,24 @@ function afficherListeAmis(){
 	selectAmis(code);
 }
 
+//////////////////////////////////////
+//	Penser à prévenir le serveur	//
+//////////////////////////////////////
 function changerVisibilite(event){
 
+	//Si c'est un groupe qui change de visibilité
 	if($(event.currentTarget).attr("data_ami_slider_id")==undefined)
 	{
 		var groupId=$(event.currentTarget).attr("data_group_slider_id");
 		var groupVisibilite=($(event.currentTarget).val()=="oui")?true:false;
 		updateGroupeVisibilite(groupId, groupVisibilite);
 
+		// On change les valeurs de chaque ami dans le groupe et on éclenche les triggers correspondants
 		$("[data_group_id="+groupId+"] .amiVisibility [data-role=slider]").val($(event.currentTarget).val());
 		$("[data_group_id="+groupId+"] .amiVisibility [data-role=slider]").trigger("slidestop");
 		$("[data_group_id="+groupId+"] .amiVisibility [data-role=slider]").slider("refresh");
 	}
-	else
+	else	//Si c'est un ami, on change jsute sa valeur
 	{
 		var amiId=$(event.currentTarget).attr("data_ami_slider_id");
 		var amiVisibilite=($(event.currentTarget).val()=="oui")?true:false;
@@ -118,6 +136,7 @@ function changerVisibilite(event){
 	}
 }
 
+//Supprime le groupe et place les amis dans le groupe "Nouveaux Amis" puisqu'il n'y a pas de triggers dans la base
 function supprimerGroupe(){
 	var idGroupeSuppr=$("#gestionGroupe").attr("data_group_id");
 	deleteGroupe(idGroupeSuppr);
@@ -127,6 +146,7 @@ function supprimerGroupe(){
 	$("#gestionGroupe").popup("close");
 }
 
+//Si le nom est conforme et non utilisé, on change
 function changerNomGroupe(){
 
 	var leNom=HTMLEncode($("input").val());
@@ -144,6 +164,7 @@ function changerNomGroupe(){
 	}
 }
 
+// Fonction d'encodage des caractères spéciaux
 function HTMLEncode(wText){
 	if(typeof(wText)!="string")
 	{

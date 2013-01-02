@@ -1,3 +1,4 @@
+// Lorsque l'appareil est pret, on affiche la page de connexion
 function onLoad(){
 	document.addEventListener("deviceready", function(){createDB(); afficherConnexion();}, false);
 }
@@ -73,6 +74,7 @@ function afficherAmis(){
 		success: function(data){
 			$("#contener *").remove();
 			$("#contener").append(data);
+			//Place la page dialog au bon endroit dans la page
 			$("#dialogChangerNomGroupe").remove().insertAfter("#page");
 			instanciationAmis();
 			$("#page").page("destroy").page();
@@ -90,7 +92,7 @@ function afficherMap(unLoginDest){
 		success: function(data){
 			$("#contener *").remove();
 			$("#contener").append(data);
-			if(unLoginDest!=null){nomDestination=unLoginDest;}
+			if(unLoginDest!=null){nomDestination=unLoginDest;}	//Permet de tracer la route si vient de ficheAmi
 			instanciationMap();
 			$("#page").page("destroy").page();
 		},

@@ -1,7 +1,9 @@
 function instanciationAjoutAmi(){
 
+	// Gestion du formulaire
 	$("form").submit(nouvelleDemandeAmi);
 	
+	//Gestion du bouton retour
 	$("#boutonRetour .ui-btn-text").text("Retour");
 	$("#boutonRetour").unbind();
 	$("#boutonRetour").click(afficherMenu);

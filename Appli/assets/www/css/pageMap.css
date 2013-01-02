@@ -1,11 +1,13 @@
 @CHARSET "ISO-8859-1";
 
+/* Taille du cadre contenant la map */
 #map{
 	height: 300px;
 	border-style: solid;
 	border-width: thin;
 }
 
+/* Taille des popup liés aux marqueurs  */
 #bulle{
 	width: 300px;
 	height: 100px;

@@ -1,5 +1,6 @@
 var db=null;
 
+// Fonction pour créer la BD
 function createDB(){
 	db = window.openDatabase("baseRoads", "2.0", "Roads DB", 1000000);
 	db.transaction(function(tx){

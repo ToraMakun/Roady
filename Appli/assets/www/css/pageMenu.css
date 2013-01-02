@@ -1,5 +1,6 @@
 @CHARSET "ISO-8859-1";
 
+/* Positionnement des boutons Quitter et Paramètres */
 #boutonsBasDePage{
 	top: 350px;
 }

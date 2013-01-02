@@ -1,22 +1,28 @@
-var listeMarkers=new Array();
-var userMarker=null;
-var nomDestination=null;
-var map=null;
+var listeMarkers=new Array();		//Liste des marqueurs sur la map
+var userMarker=null;				//Marqueur de l'utilisateur
+var nomDestination=null;			//Login de l'ami que l'on veut rejoindre
+var map=null;						//La map
 
 function instanciationMap(){
 
+	/* Liaison des events pour les boutons de la page */
 	$("#boutonCentrer").click(centrerCarte);
 	$("#formRecherche").submit(function(){lancerRecherche(); return false;});
 	
-	$("#boutonTracer").click(function(event){tracerRoute(event); $("#bulle").popup("close");});
+	/* Liaison des events pour les boutons du popup #bulle */
+	$("#boutonTracer").click(function(event){
+		tracerRoute(event);
+		$("#bulle").popup("close");
+	});
 	$("#boutonRefresh").click(
 			function(){
 				$("#bulle").popup("close");
 				unsetMarkers();
 				centrerCarte();
 				afficherAmis();
-			});
+	});
 	
+	/* Gestion et liaison du bouton retour */
 	$("#boutonRetour .ui-btn-text").text("Retour");
 	$("#boutonRetour").unbind();
 	$("#boutonRetour").click(function(){afficherMenu();});
@@ -24,6 +30,7 @@ function instanciationMap(){
 
 function centrerCarte(){
 	
+	/* On reprend la position, on replace le marqueur de l'utilisateur, et on centre la map */
 	navigator.geolocation.getCurrentPosition(
 		function(position) {
 			latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
@@ -48,6 +55,7 @@ function initialiserCarte(){
 				    mapTypeId : google.maps.MapTypeId.TERRAIN, // Type de carte, différentes valeurs possible HYBRID, ROADMAP, SATELLITE, TERRAIN
 				    maxZoom   : 20
 			};
+			//On instancie la map, on place le marqueur de l'utilisateur et on affiche les amis
 			map = new google.maps.Map(document.getElementById('map'), myOptions);
 			placerMarker(latLng.lat(), latLng.lng(), "Moi");
 			afficherMarkersAmis();
@@ -57,7 +65,7 @@ function initialiserCarte(){
 			var myOptions = {
 				    zoom      : 14,
 				    center    : latLng,
-				    mapTypeId : google.maps.MapTypeId.TERRAIN, // Type de carte, différentes valeurs possible HYBRID, ROADMAP, SATELLITE, TERRAIN
+				    mapTypeId : google.maps.MapTypeId.TERRAIN,
 				    maxZoom   : 20
 			};
 			map = new google.maps.Map(document.getElementById('map'), myOptions);
@@ -75,7 +83,6 @@ function afficherMarkersAmis(){
 			if(resultat.length!=0){
 				for(var i=0;i<resultat.rows.length;i++)
 				{
-					//alert(resultat.rows.item(i).prenom+" "+resultat.rows.item(i).latitude);
 					if(resultat.rows.item(i).latitude!=null)
 					{
 						placerMarker(resultat.rows.item(i).latitude,
@@ -84,10 +91,8 @@ function afficherMarkersAmis(){
 					}
 				}
 			}
-			else
-			{
-				//alert("Pas de retour venant de la base");
-			}
+			
+			//Si on a une destination, on trace la route (vient de ficheAmi -> bouton "Afficher position")
 			if(nomDestination!=null)
 			{
 				google.maps.event.trigger(getMarker(nomDestination), "click", {x:0, y:0});
@@ -106,6 +111,7 @@ function placerMarker(uneLatitude, uneLongitude, unTitre){
 			map      : map,
 			title    : unTitre});
 
+	//Si c'est le marqueur de l'utilisateur, on enlève le boutton "Tracer route"
 	if(unTitre=="Moi")
 	{
 		google.maps.event.addListener(marker, 'click', function(event) {
@@ -156,34 +162,36 @@ function tracerRoute(event){
 
 function lancerRecherche(){
 
-		var leNom=HTMLEncode($("input").val());
-		
-		if(leNom.length!=0 && leNom.length<21)
-		{
-			unsetMarkers();
-			var code=function(resultat){
-				if(resultat.rows.length!=0)
+	//Fonction d'encodage des caractères spéciaux
+	var leNom=HTMLEncode($("input").val());
+	
+	//Si la recherche est conforme on affiche les amis correspondant, sinon on réaffiche tout le monde
+	if(leNom.length!=0 && leNom.length<21)
+	{
+		unsetMarkers();
+		var code=function(resultat){
+			if(resultat.rows.length!=0)
+			{
+				for(var i=0;i<resultat.rows.length;i++)
 				{
-					for(var i=0;i<resultat.rows.length;i++)
+					if(resultat.rows.item(i).latitude!=null)
 					{
-						if(resultat.rows.item(i).latitude!=null)
-						{
-							placerMarker(resultat.rows.item(i).latitude,
-									resultat.rows.item(i).longitude,
-									resultat.rows.item(i).prenom+" "+resultat.rows.item(i).nom); 
-						}
+						placerMarker(resultat.rows.item(i).latitude,
+								resultat.rows.item(i).longitude,
+								resultat.rows.item(i).prenom+" "+resultat.rows.item(i).nom); 
 					}
 				}
 			}
-			
-			selectAmisRecherche(leNom, code);
 		}
-		else
-		{
-			unsetMarkers();
-			afficherMarkersAmis();
-		}
+		
+		selectAmisRecherche(leNom, code);
 	}
+	else
+	{
+		unsetMarkers();
+		afficherMarkersAmis();
+	}
+}
 
 //Cherche le marker selon le nom de l'utilisateur
 function getMarker(unTitre){
@@ -205,6 +213,7 @@ function unsetMarkers(){
 	listeMarkers=new Array();
 }
 
+//Fonction d'encodage des caractères spéciaux
 function HTMLEncode(wText){
 	if(typeof(wText)!="string")
 	{

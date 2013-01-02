@@ -1,14 +1,17 @@
 @CHARSET "ISO-8859-1";
 
+/* Positionne le switch des amis à droite */
 .amiVisibility{
 	float: right;
 	padding-bottom: 10px;
 }
 
+/* Positionne le switcd des groupes à droite */
 .groupVisibility{
 	float: right;
 }
 
+/* Ajoute une bordure aux blocs qui forme une ligne ami */
 [data_group_id] .ui-block-a, [data_group_id] .ui-block-b{
 	border-bottom-style:solid;
 	border-width:thin;
@@ -19,10 +22,11 @@
 	padding-bottom: 16px;
 }
 
+/* Positionne les noms des groupes et des amis */
 .amiName{
 	display: block;
 	float: left;
-	width: 50%;
+	width: 75%;
 	padding-top: 10px; 
 }
 
