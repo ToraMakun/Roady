@@ -59,5 +59,5 @@ function demandePosition(){
 
 function resultatPosition(data){
 
-	alert("poule");
+	alert(data.amis[0].login);
 }
