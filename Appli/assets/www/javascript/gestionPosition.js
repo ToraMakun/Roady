@@ -99,12 +99,16 @@ function demandePosition(){
 function resultatPosition(data){
 
 	if(data.codeExec==0)
+	{alert("Poule");
+		for(var it=0; it<data.amis.length; it++)
 		{
-		alert(data.amis[0].login);
+			updateAmiPosition(data.amis[it].login, data.amis[it].lat, data.amis[it].long);
 		}
+		alert("Poule2");
+	}
 	else
-		{
-		alert("Marche à moitié");
-		}
-	
+	{
+		deleteUtilisateur(); //deco serveur
+		afficherConnexion();
+	}
 }

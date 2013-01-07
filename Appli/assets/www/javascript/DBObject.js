@@ -238,6 +238,12 @@ function updateAmi(id, visibilite){
 	}, errorSql);
 }
 
+function updateAmiPosition(login, lat, long){
+
+	db.transaction(function(tx){
+		tx.executeSql("update ami set latitude=?, longitude=? where login=?", [lat, long, login]);
+	}, errorSql);
+}
 function updateAmiParGroup(idGroupe, visibilite){
 
 	db.transaction(function(tx){
