@@ -41,6 +41,7 @@ function createDB(){
 		}, errorSql);
 		//deleteAmis();
 		//deleteDemandesAmis();
+		deleteUtilisateur();
 		insertGroupe("Groupe 1");
 		insertGroupe("Groupe 2");
 		insertAmi("Toule", "Poule", "Poule", "poule@poule.fr", "0405040504", 46.391094, -0.421225);
@@ -80,6 +81,15 @@ function insertDemandeAmi(login, isUserEmetteur){
 function insertGroupe(nom){
 	db.transaction(function(tx){
 		tx.executeSql("insert or ignore into groupe(nom) values(?)", [nom]);
+	}, errorSql);
+}
+
+function selectUtilisateur(code){
+
+	db.transaction(function(tx){
+		tx.executeSql('SELECT * FROM utilisateur', [], function(tx, results){
+				code(results);
+		}, errorSql);
 	}, errorSql);
 }
 
@@ -183,6 +193,12 @@ function deleteAmis(){
 	}, errorSql);
 }
 
+function deleteUtilisateur(){
+	db.transaction(function(tx){
+		tx.executeSql('delete FROM utilisateur');
+	}, errorSql);
+}
+
 function deleteAmisParId(id){
 	db.transaction(function(tx){
 		tx.executeSql('delete FROM ami where id=?', [id]);
@@ -251,5 +267,5 @@ function updateDemandeAmi(id, status){
 }
 
 function errorSql(error){
-	alert("Error processing SQL ("+error.code+"): "+error.message);
+	alert("Error("+error.code+"): "+error.message);
 }

@@ -1,5 +1,8 @@
 function instanciationMenu(){
 
+	//Rafraîchit les positions
+	demandePosition();
+	
 	/* Liaison des events pour les différents boutons de la page */
 	$("#ajoutAmi").click(afficherAjoutAmi);
 	$("#affAmis").click(afficherAmis);
