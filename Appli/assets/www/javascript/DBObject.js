@@ -34,12 +34,12 @@ function createDB(){
 		tx.executeSql("create table if not exists utilisateur (" +
 				"id integer not null constraint PKutilisateur primary key autoincrement," +
 				"login varchar(20) not null constraint Uutilisateur_login unique," +
-				"message varchar(20) not null default '')"
+				"token varchar(32) not null)"
 		);
 		db.transaction(function(tx){
 			tx.executeSql("insert or ignore into groupe(id, nom) values(?, ?)", [0, "Nouveaux amis"]);
 		}, errorSql);
-		deleteAmis();
+		//deleteAmis();
 		//deleteDemandesAmis();
 		insertGroupe("Groupe 1");
 		insertGroupe("Groupe 2");
@@ -64,6 +64,12 @@ function insertAmi(login, nom, prenom, mail, telephone, latitude, longitude){
 		tx.executeSql("insert or ignore into ami(login, nom, prenom, mail, telephone) values(?, ?, ?, ?, ?)", [login, nom, prenom, mail, telephone]);
 	}, errorSql);
 }*/
+
+function insertUtilisateur(login, token){
+	db.transaction(function(tx){
+		tx.executeSql("insert or ignore into utilisateur(login, token) values(?, ?)", [login, token]);
+	}, errorSql);
+}
 
 function insertDemandeAmi(login, isUserEmetteur){
 	db.transaction(function(tx){
