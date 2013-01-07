@@ -26,9 +26,29 @@ function demandePosition(){
 						success: function(data){
 							resultatPosition(data);
 						},
-						error: function(){
+						/*error: function(){
 							alert("Erreur: page indisponible");
+						}*/
+						error:function(jqXHR, exception) {
+				            if (jqXHR.status === 0) {
+				                alert('Not connect.\n Verify Network.');
+				            } else if (jqXHR.status == 404) {
+				                alert('Requested page not found. [404]');
+				            } else if (jqXHR.status == 500) {
+				                alert('Internal Server Error [500].');
+				            } else if (exception === 'parsererror') {
+				                alert('Requested JSON parse failed.');
+								alert(jqXHR.responseText);
+				            } else if (exception === 'timeout') {
+				                alert('Time out error.');
+				            } else if (exception === 'abort') {
+				                alert('Ajax request aborted.');
+				            } else {
+				                alert('Uncaught Error.\n' + jqXHR.responseText);
+				            }
+				        
 						}
+						
 					});
 				},
 				function(error) {
@@ -41,8 +61,27 @@ function demandePosition(){
 						success: function(data){
 							resultatPosition(data);
 						},
-						error: function(){
+						/*error: function(){
 							alert("Erreur: page indisponible");
+						}*/
+						error:function(jqXHR, exception) {
+				            if (jqXHR.status === 0) {
+				                alert('Not connect.\n Verify Network.');
+				            } else if (jqXHR.status == 404) {
+				                alert('Requested page not found. [404]');
+				            } else if (jqXHR.status == 500) {
+				                alert('Internal Server Error [500].');
+				            } else if (exception === 'parsererror') {
+				                alert('Requested JSON parse failed.');
+								alert(jqXHR.responseText);
+				            } else if (exception === 'timeout') {
+				                alert('Time out error.');
+				            } else if (exception === 'abort') {
+				                alert('Ajax request aborted.');
+				            } else {
+				                alert('Uncaught Error.\n' + jqXHR.responseText);
+				            }
+				        
 						}
 					});
 				},
@@ -59,5 +98,13 @@ function demandePosition(){
 
 function resultatPosition(data){
 
-	alert(data.amis[0].login);
+	if(data.codeExec==0)
+		{
+		alert(data.amis[0].login);
+		}
+	else
+		{
+		alert("Marche à moitié");
+		}
+	
 }
