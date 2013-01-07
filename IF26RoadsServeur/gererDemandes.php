@@ -18,6 +18,7 @@
 		$resultat=$sql->fetch();
 		if($resultat['token']==$_POST["token"])
 		{
+			//On envoie les demandes nous concernant
 			$sql=$pdo->prepare('select u1.login as loginEmet, u2.login as loginDest, status from utilisateur u1, utilisateur u2, demandeami da where u1.login=? AND u1.id=da.id_user_emetteur and u2.id=da.id_user_dest');
 			$sql->bindValue(1, $_POST['login'], PDO::PARAM_STR);
 			$sql->execute();

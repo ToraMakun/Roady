@@ -19,7 +19,9 @@ function instanciationDemandeAmi(){
 
 function reponseOkDemande(event){
 	
+	//On récupère l'id de la demandeAmi
 	var id=$(event.currentTarget).attr("data_id");
+	
 	var code=function(resultat)
 	{
 		var loginUtilisateur=null;
@@ -44,6 +46,7 @@ function reponseOkDemande(event){
 						data: 'login='+loginUtilisateur+'&token='+tokenUtilisateur+'&loginAmi='+loginAmi+'&reponse=Accept&eacute;', 
 						success: function(data){
 
+							//Si la réponse est bien enregistrée sur le serveur, on modifie la base du client
 							if(data.codeExec==0)
 							{
 								insertAmi(data.login, data.nom, data.prenom, data.mail, data.telephone);
@@ -70,7 +73,9 @@ function reponseOkDemande(event){
 
 function reponseKoDemande(event){
 	
+	//On récupère l'id de la demande
 	var id=$(event.currentTarget).attr("data_id");
+	
 	var code=function(resultat)
 	{
 		var loginUtilisateur=null;
@@ -95,6 +100,7 @@ function reponseKoDemande(event){
 						data: 'login='+loginUtilisateur+'&token='+tokenUtilisateur+'&loginAmi='+loginAmi+'&reponse=Refus&eacute;', 
 						success: function(data){
 	
+							//Si la réponse est bien enregistrée sur le serveur, on modifie la base client
 							if(data.codeExec==0)
 							{
 								$("#gestionDemande").popup("close");
@@ -137,6 +143,8 @@ function gererDemandes(){
 				data: 'login='+loginUtilisateur+'&token='+tokenUtilisateur, 
 				success: function(data){
 
+					//On récupère les demandes nous concernant 
+					//et on les ajoute ou les modifie dans la base client
 					if(data.nombre!=0)
 					{
 						for(var it=0; it<data.demandes.length; it++)

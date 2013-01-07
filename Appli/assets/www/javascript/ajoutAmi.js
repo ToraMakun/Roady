@@ -11,10 +11,13 @@ function instanciationAjoutAmi(){
 
 function nouvelleDemandeAmi(){
 	
+	//On encode les données entrées
 	var leLogin=HTMLEncode($("input").val());
 	
+	//On vérifie si les informations entrées sont conformes en taille
 	if(leLogin.length!=0 && leLogin.length<21)
 	{
+		//On vérifie si une demande à déjà été postée
 		if(!amiExiste(leLogin) && !demandeAmiExiste(leLogin))
 		{
 			var code=function(resultat)
@@ -34,6 +37,7 @@ function nouvelleDemandeAmi(){
 						dataType: 'json',
 						data: 'login='+loginUtilisateur+'&token='+tokenUtilisateur+'&loginAmi='+loginAmi, 
 						success: function(data){
+							//Si la demande est bien enregistrée sur le serveur, on ajout sur le client
 							if(data.codeExec==0)
 							{
 								alert("Demande enregistrée");
@@ -44,24 +48,8 @@ function nouvelleDemandeAmi(){
 								alert("Cet utilisateur n'existe pas");
 							}
 						},
-						error: function(jqXHR, exception) {
-				            if (jqXHR.status === 0) {
-				                alert('Not connect.\n Verify Network.');
-				            } else if (jqXHR.status == 404) {
-				                alert('Requested page not found. [404]');
-				            } else if (jqXHR.status == 500) {
-				                alert('Internal Server Error [500].');
-				            } else if (exception === 'parsererror') {
-				                alert('Requested JSON parse failed.');
-								alert(jqXHR.responseText);
-				            } else if (exception === 'timeout') {
-				                alert('Time out error.');
-				            } else if (exception === 'abort') {
-				                alert('Ajax request aborted.');
-				            } else {
-				                alert('Uncaught Error.\n' + jqXHR.responseText);
-				            }
-				        
+						error: function(){
+							alert("Erreur: page indisponible");
 						}
 					});
 				}
@@ -73,12 +61,6 @@ function nouvelleDemandeAmi(){
 			alert("Vous vous connaissez déjà");
 		}
 	}
-}
-
-function ajouterNouvelleDemandeAmi(unLogin){
-	
-	//Ajouter sur le serveur ou le faire pendant le test ?
-	insertdemandeAmi(unLogin, true);
 }
 
 function HTMLEncode(wText){

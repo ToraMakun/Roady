@@ -17,14 +17,11 @@ function instanciationConnexion(){
 
 function demandeConnexion(){
 	
-	//si ok => enregistre l'utilisateur dans la base
-	//			récupère les positions des amis
-	//			affiche le menu
-	//si pas ok => reste sur la page et lance une alerte 
-	
+	//On encode les données entrées
 	var leLogin=HTMLEncode($("#login").val());
 	var leMdp=HTMLEncode($("#mdp").val());
 	
+	//On vérifie que les données entrées sont conformes en taille
 	if(leLogin.length!=0 && leLogin.length<21 && leMdp.length!=0 && leMdp.length<21)
 	{
 		$.ajax({
@@ -33,8 +30,6 @@ function demandeConnexion(){
 			dataType: 'json',
 			data: 'login='+$('#login').val()+'&mdp='+$('#mdp').val()+'&token='+device.uuid, 
 			success: function(data){
-				/*SI TRUE ====> ajouterNouvelleDemande(leLogin), avec le champ emetteur à false
-				SI FALSE ===> alert(existe pas)*/
 				authentification(data);
 			},
 			error: function(){

@@ -9,11 +9,11 @@ function instanciationMenu(){
 	$("#affCarte").click(function(){afficherMap(null);});
 	$("#affDemandes").click(afficherDemandeAmi);
 	
-	$("#quitter").click(function(){navigator.app.exitApp();});
+	$("#quitter").click(function(){deleteUtilisateur(); navigator.app.exitApp();});
 	$("#param").click(afficherParametres);
 	
 	/* Gestion et liaison de l'event onClick pour le bouton retour*/
 	$("#boutonRetour .ui-btn-text").text("Se deconnecter");
 	$("#boutonRetour").unbind();
-	$("#boutonRetour").click(function(){afficherConnexion();});
+	$("#boutonRetour").click(function(){deleteUtilisateur(); afficherConnexion();});
 }

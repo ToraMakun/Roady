@@ -7,11 +7,13 @@ function demandePosition(){
 		var latUtilisateur=null;
 		var longUtilisateur=null;
 		
+		//On récupère nos informations pour l'identification au serveur 
 		if(resultat.rows.length==1)
 		{
 			loginUtilisateur=resultat.rows.item(0).login;
 			tokenUtilisateur=resultat.rows.item(0).token;
 
+			//On envoie ou non notre position si on a réussi à l'avoir
 			navigator.geolocation.getCurrentPosition(
 				function(position) {
 				
@@ -26,29 +28,9 @@ function demandePosition(){
 						success: function(data){
 							resultatPosition(data);
 						},
-						/*error: function(){
+						error: function(){
 							alert("Erreur: page indisponible");
-						}*/
-						error:function(jqXHR, exception) {
-				            if (jqXHR.status === 0) {
-				                alert('Not connect.\n Verify Network.');
-				            } else if (jqXHR.status == 404) {
-				                alert('Requested page not found. [404]');
-				            } else if (jqXHR.status == 500) {
-				                alert('Internal Server Error [500].');
-				            } else if (exception === 'parsererror') {
-				                alert('Requested JSON parse failed.');
-								alert(jqXHR.responseText);
-				            } else if (exception === 'timeout') {
-				                alert('Time out error.');
-				            } else if (exception === 'abort') {
-				                alert('Ajax request aborted.');
-				            } else {
-				                alert('Uncaught Error.\n' + jqXHR.responseText);
-				            }
-				        
 						}
-						
 					});
 				},
 				function(error) {
@@ -61,36 +43,13 @@ function demandePosition(){
 						success: function(data){
 							resultatPosition(data);
 						},
-						/*error: function(){
+						error: function(){
 							alert("Erreur: page indisponible");
-						}*/
-						error:function(jqXHR, exception) {
-				            if (jqXHR.status === 0) {
-				                alert('Not connect.\n Verify Network.');
-				            } else if (jqXHR.status == 404) {
-				                alert('Requested page not found. [404]');
-				            } else if (jqXHR.status == 500) {
-				                alert('Internal Server Error [500].');
-				            } else if (exception === 'parsererror') {
-				                alert('Requested JSON parse failed.');
-								alert(jqXHR.responseText);
-				            } else if (exception === 'timeout') {
-				                alert('Time out error.');
-				            } else if (exception === 'abort') {
-				                alert('Ajax request aborted.');
-				            } else {
-				                alert('Uncaught Error.\n' + jqXHR.responseText);
-				            }
-				        
 						}
 					});
 				},
 				{ enableHighAccuracy: true }
 			);
-		}
-		else
-		{
-			alert("pas d\'utilisateur");
 		}
 	}
 	selectUtilisateur(code);
@@ -98,6 +57,7 @@ function demandePosition(){
 
 function resultatPosition(data){
 
+	//On met à jour la position de nos amis
 	if(data.codeExec==0)
 	{
 		for(var it=0; it<data.amis.length; it++)
@@ -107,7 +67,7 @@ function resultatPosition(data){
 	}
 	else
 	{
-		deleteUtilisateur(); //deco serveur
+		deleteUtilisateur();
 		afficherConnexion();
 	}
 }
