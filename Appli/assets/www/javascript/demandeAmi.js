@@ -43,12 +43,62 @@ function reponseOkDemande(event){
 						dataType: 'json',
 						data: 'login='+loginUtilisateur+'&token='+tokenUtilisateur+'&loginAmi='+loginAmi+'&reponse=Accept&eacute;', 
 						success: function(data){
-	
-							if(data.codeExec==1)
+
+							if(data.codeExec==0)
 							{
-								//insertAmi();
+								insertAmi(data.login, data.nom, data.prenom, data.mail, data.telephone);
 								$("#gestionDemande").popup("close");
 								updateDemandeAmi(id, "Accept&eacute;");
+								afficherDemandeAmi();
+							}
+							else
+							{
+								alert("erreur");
+							}
+						},
+						error:function(jqXHR, exception) {
+				            alert("Erreur: page indisponible");
+						}
+					});
+				}
+			}
+			selectDemandeAmiParId(id, code);
+		}
+	}
+	selectUtilisateur(code);
+}
+
+function reponseKoDemande(event){
+	
+	var id=$(event.currentTarget).attr("data_id");
+	var code=function(resultat)
+	{
+		var loginUtilisateur=null;
+		var tokenUtilisateur=null;
+		var loginAmi=null;
+		
+		if(resultat.rows.length==1)
+		{
+			loginUtilisateur=resultat.rows.item(0).login;
+			tokenUtilisateur=resultat.rows.item(0).token;
+			
+			var code=function(resultat)
+			{
+				if(resultat.rows.length==1)
+				{
+					loginAmi=resultat.rows.item(0).login;
+					
+					$.ajax({
+						url: 'http://10.0.2.2:8080/IF26RoadsServeur/reponseDemande.php',
+						type: 'POST',
+						dataType: 'json',
+						data: 'login='+loginUtilisateur+'&token='+tokenUtilisateur+'&loginAmi='+loginAmi+'&reponse=Refus&eacute;', 
+						success: function(data){
+	
+							if(data.codeExec==0)
+							{
+								$("#gestionDemande").popup("close");
+								updateDemandeAmi(id, "Refus&eacute;");
 								afficherDemandeAmi();
 							}
 							else
@@ -62,19 +112,10 @@ function reponseOkDemande(event){
 					});
 				}
 			}
-			selectDemandeami(code); //// FAIT ATTENTION
+			selectDemandeAmiParId(id, code);
 		}
 	}
 	selectUtilisateur(code);
-}
-
-function reponseKoDemande(event){
-	
-	var id=$(event.currentTarget).attr("data_id");
-	//Prévenir le serveur
-	$("#gestionDemande").popup("close");
-	updateDemandeAmi(id, "Refus&eacute;");
-	afficherDemandeAmi();
 }
 
 function gererDemandes(){

@@ -15,7 +15,7 @@
     if($sql->rowCount()==1)
     {
 		$resultat=$sql->fetch();
-		if(1==1)//$resultat['token']==$_POST["token"])
+		if($resultat['token']==$_POST["token"])
 		{
 			$idUtilisateur;
 			$idAmi;
@@ -37,15 +37,15 @@
 			$sql->bindValue(2, $idAmi, PDO::PARAM_INT);
 			$sql->bindValue(3, $idUtilisateur, PDO::PARAM_INT);
 			$sql->execute();
-			echo $_POST['reponse'];
-			if($_POST['reponse']=="Accepté")
+
+			if($_POST['reponse']=="Accept")
 			{
 				$sql=$pdo->prepare('select * from utilisateur where login= ?');
 				$sql->bindValue(1, $_POST['loginAmi'], PDO::PARAM_STR);
 				$sql->execute();
 				$resultat=$sql->fetch();
 			
-				echo '{"codeExec":0, "nom":"'.$resultat['nom'].'", "prenom":"'.$resultat['prenom'].'", "mail":"'.$resultat['mail'].'", "telephone":"'.$resultat['telephone'].'"}';
+				echo '{"codeExec":0, "login":"'.$resultat['login'].'", "nom":"'.$resultat['nom'].'", "prenom":"'.$resultat['prenom'].'", "mail":"'.$resultat['mail'].'", "telephone":"'.$resultat['telephone'].'"}';
 			}
 			else
 			{
