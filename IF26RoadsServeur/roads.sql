@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le: Lun 07 Janvier 2013 à 14:59
+-- Généré le: Lun 07 Janvier 2013 à 23:57
 -- Version du serveur: 5.5.20-log
 -- Version de PHP: 5.3.0
 
@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `ami` (
   `visibilite` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_user_emetteur` (`id_user_emetteur`,`id_user_dest`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 -- --------------------------------------------------------
 
@@ -48,7 +48,14 @@ CREATE TABLE IF NOT EXISTS `demandeami` (
   `status` varchar(20) NOT NULL DEFAULT 'En cours',
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_user_emetteur` (`id_user_emetteur`,`id_user_dest`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+
+--
+-- Contenu de la table `demandeami`
+--
+
+INSERT INTO `demandeami` (`id`, `id_user_emetteur`, `id_user_dest`, `status`) VALUES
+(5, 3, 1, 'En cours');
 
 -- --------------------------------------------------------
 
@@ -65,14 +72,23 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
   `mail` varchar(40) NOT NULL,
   `nb_essai` int(1) NOT NULL DEFAULT '0',
   `date_ban` timestamp NULL DEFAULT NULL,
-  `telephone` int(11) NOT NULL,
+  `telephone` varchar(10) NOT NULL,
   `latitude` varchar(10) DEFAULT NULL,
   `longitude` varchar(10) DEFAULT NULL,
   `token` varchar(36) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `login` (`login`),
   UNIQUE KEY `login_2` (`login`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Contenu de la table `utilisateur`
+--
+
+INSERT INTO `utilisateur` (`id`, `login`, `mdp`, `nom`, `prenom`, `mail`, `nb_essai`, `date_ban`, `telephone`, `latitude`, `longitude`, `token`) VALUES
+(1, 'Poule', 'f4164555521cee56f4e3cc3270f14f3088c0', 'Poule1', 'Poule1', 'poule@poule.fr', 0, NULL, '1010101010', '46.1585183', '-1.1516866', 'bcab0282de464f6da251aa40969c65fb'),
+(2, 'Toule', 'f4164555521cee56f4e3cc3270f14f3088c0', 'Ami1', 'Ami1', 'Ami1@Ami1.fr', 0, NULL, '1010101010', '46.391094', '-0.421225', NULL),
+(3, 'Tiule', 'f4164555521cee56f4e3cc3270f14f3088c0', 'ami2', 'ami2', 'ami2@ami2.fr', 0, NULL, '1010101010', '46.582665', '0.334594', NULL);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

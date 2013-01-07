@@ -4,10 +4,6 @@ var db=null;
 function createDB(){
 	db = window.openDatabase("baseRoads", "2.0", "Roads DB", 1000000);
 	db.transaction(function(tx){
-		/*tx.executeSql("drop table demandeAmi");
-		tx.executeSql("drop table ami");
-		tx.executeSql("drop table utilisateur");
-		tx.executeSql("drop table groupe");*/
 		tx.executeSql("create table if not exists groupe (" +
 				"id integer not null constraint PKgroupe primary key autoincrement," +
 				"nom varchar(20) not null constraint Ugroupe_login unique," +
@@ -39,27 +35,11 @@ function createDB(){
 		db.transaction(function(tx){
 			tx.executeSql("insert or ignore into groupe(id, nom) values(?, ?)", [0, "Nouveaux amis"]);
 		}, errorSql);
-		deleteAmis();
-		deleteDemandesAmis();
-		deleteUtilisateur();
 		insertGroupe("Groupe 1");
 		insertGroupe("Groupe 2");
-		//insertAmi("Toule", "Poule", "Poule", "poule@poule.fr", "0405040504", 46.391094, -0.421225);
-		//insertAmi("Tiule", "Pyule", "Pyule", "pyule@pyule.fr", "0546548752", 46.582665, 0.334594);
-		//insertAmi("Toule", "Piule", "Piule", "piule@piule.fr", "0546548752", "NULL","NULL");
-		//insertDemandeAmi("Plouah", true);
-		//insertDemandeAmi("Pliuah", false);
 	}, errorSql);
 }
 
-//NON CONFORME A LA VERSION FINALE
-/*function insertAmi(login, nom, prenom, mail, telephone, latitude, longitude){
-	db.transaction(function(tx){
-		tx.executeSql("insert or ignore into ami(login, nom, prenom, mail, telephone, latitude, longitude) values(?, ?, ?, ?, ?, ?, ?)", [login, nom, prenom, mail, telephone, latitude, longitude]);
-	}, errorSql);
-}*/
-
-//CONFORME A LA VERSION FINALE
 function insertAmi(login, nom, prenom, mail, telephone){
 	db.transaction(function(tx){
 		tx.executeSql("insert or ignore into ami(login, nom, prenom, mail, telephone) values(?, ?, ?, ?, ?)", [login, nom, prenom, mail, telephone]);
@@ -83,6 +63,8 @@ function insertGroupe(nom){
 		tx.executeSql("insert or ignore into groupe(nom) values(?)", [nom]);
 	}, errorSql);
 }
+
+/////////////////////////////////////////////////////////////
 
 function selectUtilisateur(code){
 
@@ -147,6 +129,8 @@ function selectDemandeAmiParId(id, code){
 	}, errorSql);
 }
 
+///////////////////////////////////////////////////////////////////
+
 function amiExiste(unLogin){
 
 	db.transaction(function(tx){
@@ -195,6 +179,7 @@ function groupeExiste(unNom){
 	}, errorSql);
 }
 
+///////////////////////////////////////////////////////////////////
 
 function deleteAmis(){
 	db.transaction(function(tx){
@@ -225,6 +210,8 @@ function deleteGroupe(id){
 		tx.executeSql('delete FROM groupe where id=?', [id]);
 	}, errorSql);
 }
+
+///////////////////////////////////////////////////////////////////
 
 function updateGroupeVisibilite(id, visibilite){
 
@@ -287,6 +274,8 @@ function updateDemandeAmiLogin(login, status){
 		tx.executeSql("update demandeAmi set status=? where login=?", [status, login]);
 	}, errorSql);
 }
+
+///////////////////////////////////////////////////////////////////
 
 function errorSql(error){
 	alert("Error("+error.code+"): "+error.message);
