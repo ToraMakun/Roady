@@ -1,7 +1,20 @@
 function instanciationConnexion(){
 
 	// Gestion de l'événement onSubmit
-	$("form").submit(function(){afficherMenu(); return false;});
+	$("form").submit(function()
+	{
+		$.ajax({  
+            type: "POST",  
+            url: "localhost/authentification.php",  
+            data: $("#form_connexion").serialize(),  
+            dataType: "json",  
+  
+            success: afficherMenu(); ,  
+            error: alert("Utilisateur ou mot de passe incorrect.");  
+        });  
+   
+		return false;
+	});
 	
 	// Gestion du bouton afficherInscription
 	$("#boutonInscription").click(afficherInscription);
