@@ -17,23 +17,44 @@ function nouvelleDemandeAmi(){
 	{
 		if(!amiExiste(leLogin) && !demandeAmiExiste(leLogin))
 		{
-			//tester si existe sur le serveur
-			/*
-			$.ajax({
-				url: 
-				dataType: 
-				success: function(data){
-					SI TRUE ====> ajouterNouvelleDemande(leLogin), avec le champ emetteur à false
-					SI FALSE ===> alert(existe pas)
-				},
-				error: function(){
-					alert("Erreur: page indisponible");
+			var code=function(resultat)
+			{
+				var loginUtilisateur=null;
+				var tokenUtilisateur=null;
+				var loginAmi=leLogin;
+				
+				if(resultat.rows.length==1)
+				{
+					loginUtilisateur=resultat.rows.item(0).login;
+					tokenUtilisateur=resultat.rows.item(0).token;
+					
+					$.ajax({
+						url: 'http://10.0.2.2:8080/IF26RoadsServeur/ajoutAmi.php',
+						type: 'POST',
+						dataType: 'json',
+						data: 'login='+loginUtilisateur+'&token='+tokenUtilisateur+'&loginAmi='+loginAmi, 
+						success: function(data){
+							if(data.codeExec==0)
+							{
+								alert("Demande enregistrée");
+								insertdemandeAmi(loginAmi, true);
+							}
+							else
+							{
+								alert("Cet utilisateur n'existe pas");
+							}
+						},
+						error: function(){
+							alert("Erreur: page indisponible");
+						}
+					});
 				}
-			});*/
+			}
+			selectUtilisateur(code);
 		}
 		else
 		{
-			alert("Vous vous connaisez déjà");
+			alert("Vous vous connaissez déjà");
 		}
 	}
 }
