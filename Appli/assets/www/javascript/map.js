@@ -17,6 +17,7 @@ function instanciationMap(){
 	$("#boutonRefresh").click(
 			function(){
 				$("#bulle").popup("close");
+				demandePosition();
 				unsetMarkers();
 				centrerCarte();
 				afficherAmis();

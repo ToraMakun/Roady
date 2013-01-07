@@ -40,15 +40,15 @@ function createDB(){
 			tx.executeSql("insert or ignore into groupe(id, nom) values(?, ?)", [0, "Nouveaux amis"]);
 		}, errorSql);
 		//deleteAmis();
-		//deleteDemandesAmis();
+		deleteDemandesAmis();
 		deleteUtilisateur();
 		insertGroupe("Groupe 1");
 		insertGroupe("Groupe 2");
 		insertAmi("Toule", "Poule", "Poule", "poule@poule.fr", "0405040504", 46.391094, -0.421225);
 		insertAmi("Tiule", "Pyule", "Pyule", "pyule@pyule.fr", "0546548752", 46.582665, 0.334594);
 		insertAmi("Toule", "Piule", "Piule", "piule@piule.fr", "0546548752", "NULL","NULL");
-		insertDemandeAmi("Plouah", true);
-		insertDemandeAmi("Pliuah", false);
+		//insertDemandeAmi("Plouah", true);
+		//insertDemandeAmi("Pliuah", false);
 	}, errorSql);
 }
 
@@ -269,6 +269,13 @@ function updateDemandeAmi(id, status){
 
 	db.transaction(function(tx){
 		tx.executeSql("update demandeAmi set status=? where id=?", [status, id]);
+	}, errorSql);
+}
+
+function updateDemandeAmiLogin(login, status){
+
+	db.transaction(function(tx){
+		tx.executeSql("update demandeAmi set status=? where login=?", [status, login]);
 	}, errorSql);
 }
 

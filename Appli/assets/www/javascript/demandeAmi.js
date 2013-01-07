@@ -1,7 +1,7 @@
 function instanciationDemandeAmi(){
 	
 	// Affiche la page de manière dynamique
-	afficherDemandes();
+	gererDemandes();
 	
 	// Gestion des event pour les boutons du popup GestionDemande (réponse à la demande)
 	$("#buttonDemandeOk").click(function(event){
@@ -24,6 +24,50 @@ function instanciationDemandeAmi(){
 	$("#boutonRetour .ui-btn-text").text("Retour");
 	$("#boutonRetour").unbind();
 	$("#boutonRetour").click(afficherMenu);
+}
+
+function gererDemandes(){
+	
+	var code=function(resultat)
+	{
+		var loginUtilisateur=null;
+		var tokenUtilisateur=null;
+		
+		if(resultat.rows.length==1)
+		{
+			loginUtilisateur=resultat.rows.item(0).login;
+			tokenUtilisateur=resultat.rows.item(0).token;
+			
+			$.ajax({
+				url: 'http://10.0.2.2:8080/IF26RoadsServeur/gererDemandes.php',
+				type: 'POST',
+				dataType: 'json',
+				data: 'login='+loginUtilisateur+'&token='+tokenUtilisateur, 
+				success: function(data){
+
+					if(data.nombre!=0)
+					{
+						for(var it=0; it<data.demandes.length; it++)
+						{
+							if(data.demandes[it].loginDest==loginUtilisateur)
+							{
+								insertDemandeAmi(data.demandes[it].loginEmet, false);
+							}
+							else
+							{
+								updateDemandeAmiLogin(data.demandes[it].loginDest, data.demandes[it].status);
+							}
+						}
+					}
+					afficherDemandes();
+				},
+				error: function(){
+					alert("Erreur: page indisponible");
+				}
+			});
+		}
+	}
+	selectUtilisateur(code);
 }
 
 function afficherDemandes(){
