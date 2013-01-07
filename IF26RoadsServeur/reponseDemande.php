@@ -41,9 +41,14 @@
 			$sql->bindValue(3, $idUtilisateur, PDO::PARAM_INT);
 			$sql->execute();
 
-			//Si c'est accepté, on donne les infos de l'ami à l'utilisateur
+			//Si c'est accepté, on insère et on donne les infos de l'ami à l'utilisateur
 			if($_POST['reponse']=="Accept")
 			{
+				$sql=$pdo->prepare('insert into ami(id_user_emetteur, id_user_dest) values (?,?)');
+				$sql->bindValue(1, $idAmi, PDO::PARAM_STR);
+				$sql->bindValue(2, $idUtilisateur, PDO::PARAM_STR);
+				$sql->execute();
+				
 				$sql=$pdo->prepare('select * from utilisateur where login= ?');
 				$sql->bindValue(1, $_POST['loginAmi'], PDO::PARAM_STR);
 				$sql->execute();
