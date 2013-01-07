@@ -11,3 +11,11 @@ function instanciationConnexion(){
 	$("#boutonRetour").unbind();
 	$("#boutonRetour").click(function(){navigator.app.exitApp();});
 }
+
+function demandeConnexion(){
+	
+	//si ok => enregistre l'utilisateur dans la base
+	//			récupère les positions des amis
+	//			affiche le menu
+	//si pas ok => reste sur la page et lance une alerte 
+}

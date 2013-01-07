@@ -20,14 +20,14 @@ function nouvelleDemandeAmi(){
 			//tester si existe sur le serveur
 			/*
 			$.ajax({
-				url: 'html/amis.html',
-				dataType: 'html',
+				url: 
+				dataType: 
 				success: function(data){
-					SI TRUE ====> ajouterNouvelleDemande(leLogin)
-					SI FALSE ===> alert(pas bon)
+					SI TRUE ====> ajouterNouvelleDemande(leLogin), avec le champ emetteur à false
+					SI FALSE ===> alert(existe pas)
 				},
 				error: function(){
-					alert("Erreur: page amis non chargée");
+					alert("Erreur: page indisponible");
 				}
 			});*/
 		}
