@@ -137,7 +137,7 @@ function gererDemandes(){
 			tokenUtilisateur=resultat.rows.item(0).token;
 			
 			$.ajax({
-				url: 'http://10.0.2.2:8080/IF26RoadsServeur/gererDemandes.php',
+				url: 'https://10.0.2.2:4443/IF26RoadsServeur/gererDemandes.php',
 				type: 'POST',
 				dataType: 'json',
 				data: 'login='+loginUtilisateur+'&token='+tokenUtilisateur, 

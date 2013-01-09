@@ -21,7 +21,7 @@ function demandePosition(){
 					longUtilisateur=position.coords.longitude;
 
 					$.ajax({
-						url: 'http://10.0.2.2:8080/IF26RoadsServeur/position.php',
+						url: 'https://10.0.2.2:4443/IF26RoadsServeur/position.php',
 						type: 'POST',
 						dataType: 'json',
 						data: 'login='+loginUtilisateur+'&token='+tokenUtilisateur+'&lat='+latUtilisateur+'&long='+longUtilisateur, 
@@ -36,7 +36,7 @@ function demandePosition(){
 				function(error) {
 					
 					$.ajax({
-						url: 'http://10.0.2.2:8080/IF26RoadsServeur/position.php',
+						url: 'https://10.0.2.2:4443/IF26RoadsServeur/position.php',
 						type: 'POST',
 						dataType: 'json',
 						data: 'login='+loginUtilisateur+'&token='+tokenUtilisateur, 

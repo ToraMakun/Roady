@@ -25,7 +25,7 @@ function demandeConnexion(){
 	if(leLogin.length!=0 && leLogin.length<21 && leMdp.length!=0 && leMdp.length<21)
 	{
 		$.ajax({
-			url: 'http://10.0.2.2:8080/IF26RoadsServeur/authentification.php',
+			url: 'https://10.0.2.2:4443/IF26RoadsServeur/authentification.php',
 			type: 'POST',
 			dataType: 'json',
 			data: 'login='+$('#login').val()+'&mdp='+$('#mdp').val()+'&token='+device.uuid, 

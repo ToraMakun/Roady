@@ -1,0 +1,19 @@
+This is a minimalistic package of the openssl-0.9.7c binaries ported to
+MS Windows 95/98/NT/XP using the MingW32/GCC-3.1 development environment
+	(see http://sourceforge.net/projects/mingw/).
+
+Only the openssl executable and the binary DLLs are included to be used
+standalone or linked with externally compiled applications, respectively.
+
+The binaries passed openssl's internal test suite and work with cURL 7/ssl but
+have not otherwise undergone extensive testing. Please report any errors to the
+below mail address.
+
+You may have to rename libssl32.dll to ssleay32.dll for some applications.
+
+November 4th, 2003
+Joern Hartroth <hartroth@computer.org>
+
+Find the latest package available at
+
+        http://curl.haxx.se/download.html
