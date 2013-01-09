@@ -111,7 +111,14 @@ function demandeInscription(){
 
 function reponseInscription(data){
 	
-	alert("test");
+	switch(data.codeExec)
+	{
+		case 0:	alert("Compte cr&eacute;e");
+				afficherConnexion();  
+				break;
+		case 1:	alert("Il y a une erreur dans le formulaire"); break;
+		case 2:	alert("Ce login existe déjà, veuillez en chosir un autre"); break;
+	}
 }
 
 function HTMLEncode(wText){
