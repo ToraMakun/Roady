@@ -5,15 +5,17 @@
 <div data-role="content">
 	<form id="form_inscription" method="post">
 		<label for="login">Login:</label>
-		<input type="text" name="login" id="login" data-mini="true" required="required"/>
+		<input type="text" name="login" id="login" data-mini="true" value="test" required="required"/>
 		<label for="mdp">Mot de passe:</label>
-		<input type="password" name="mdp" id="mdp" data-mini="true" required="required"/>
+		<input type="password" name="mdp" id="mdp" data-mini="true" value="test" required="required"/>
 		<label for="prenom">Pr&eacute;nom:</label>
-		<input type="text" name="prenom" id="prenom" data-mini="true" required="required"/>
+		<input type="text" name="prenom" id="prenom" data-mini="true" value="test" required="required"/>
 		<label for="nom">Nom:</label>
-		<input type="text" name="nom" id="nom" data-mini="true" required="required"/>
+		<input type="text" name="nom" id="nom" data-mini="true" value="test" required="required"/>
 		<label for="mail">Mail:</label>
-		<input type="email" name="mail" id="mail" data-mini="true" required="required"/>
+		<input type="email" name="mail" id="mail" data-mini="true" value="test@test.fr" required="required"/>
+		<label for="mail">Telephone:</label>
+		<input type="tel" name="mail" id="telephone" pattern="^0\d{9}$" placeholder="0123456789" value="0123456789" data-mini="true" required="required"/>
 		<br>
 		<input type="submit" name="submit" value="Envoyer"/>
 	</form>

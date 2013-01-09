@@ -1,7 +1,5 @@
 Non fait:
 
-- Encrypatage des bases de données
+- Encryptage des bases de données
 - Vérification accrue des mouvements de l'utilisateur
 - CU Inscription
-- CU suppression d'un ami
-- La visibilité n'est pas gérée par le serveur
